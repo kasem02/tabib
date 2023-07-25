@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "973204052009",
+    "project_id": "helth-care-ed294",
+    "storage_bucket": "helth-care-ed294.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973204052009:android:0401381565012a5ee46438",
+        "android_client_info": {
+          "package_name": "com.ahmed.appointment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "973204052009-fui2c9ham9ver9do1j46bld3rsvds6kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8sA47fP_obRVbQkOjcrVP5pKbFFSIk4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "973204052009-fui2c9ham9ver9do1j46bld3rsvds6kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
