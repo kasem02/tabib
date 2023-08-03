@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
@@ -318,14 +319,19 @@ class _SignInState extends State<SignIn> {
       final User? user = (await _auth.signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
-      ))
-          .user;
+      )).user;
       if (!user!.emailVerified) {
         await user.sendEmailVerification();
       }
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-    } catch (e) {
+      final userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      if (userDoc.exists && userDoc.data()!['userType'] == 'doctor') {
+        Navigator.of(context).pushNamedAndRemoveUntil('/doctor_home', (Route<dynamic> route) => false);
+      }
+      else {
+        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      }
+    }
+    catch (e) {
       final snackBar = SnackBar(
         content: Row(
           children: [
@@ -341,7 +347,6 @@ class _SignInState extends State<SignIn> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
-
   void _pushPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => page),

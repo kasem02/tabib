@@ -39,14 +39,14 @@ class _FireBaseAuthState extends State<FireBaseAuth> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'HELLO',
+                      'اهلا بك',
                       style: GoogleFonts.b612(
                           color: Colors.black,
                           fontSize: 50,
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      'Welcome to Medico!',
+                      'مرحبا بك في تطبيقنا',
                       style: GoogleFonts.b612(
                           color: Colors.indigo[800],
                           fontSize: 17,
@@ -80,7 +80,7 @@ class _FireBaseAuthState extends State<FireBaseAuth> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Sign in",
+                                "تسجيل الدخول",
                                 style: GoogleFonts.lato(
                                   color: Colors.white,
                                   fontSize: 18.0,
@@ -109,7 +109,7 @@ class _FireBaseAuthState extends State<FireBaseAuth> {
                             height: 50.0,
                             child: ElevatedButton(
                               child: Text(
-                                "Create an Account",
+                                "انشئ حساب",
                                 style: GoogleFonts.lato(
                                   color: Colors.black,
                                   fontSize: 18.0,

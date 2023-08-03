@@ -124,11 +124,19 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // الوصول إلى العنصر الجديد هنا
+  }
   @override
   void initState() {
     super.initState();
     _getUser();
-    selectTime(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      selectTime(context);
+    });
     _doctorController.text = widget.doctor;
   }
 
@@ -181,7 +189,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(left: 16),
                         child: Text(
-                          'Enter Patient Details',
+                          'ادخل معلومات المريض',
                           style: GoogleFonts.lato(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -196,7 +204,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         controller: _nameController,
                         focusNode: f1,
                         validator: (value) {
-                          if (value!.isEmpty) return 'ادخل اسم الطبيب';
+                          if (value!.isEmpty) return 'ادخل اسم المريض';
                           return null;
                         },
                         style: GoogleFonts.lato(
@@ -302,6 +310,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                       TextFormField(
                         controller: _doctorController,
+                        initialValue: user!.displayName!,
                         validator: (value) {
                           if (value!.isEmpty) return 'ادخل اسم الطبيب';
                           return null;
@@ -361,7 +370,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               controller: _dateController,
                               validator: (value) {
                                 if (value!.isEmpty)
-                                  return 'Please Enter the Date';
+                                  return 'ادخل التاريخ من فضلك ';
                                 return null;
                               },
                               onFieldSubmitted: (String value) {
@@ -422,7 +431,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 ),
                                 filled: true,
                                 fillColor: Colors.grey[350],
-                                hintText: 'Select Time*',
+                                hintText: 'اختار الوقت *',
                                 hintStyle: GoogleFonts.lato(
                                   color: Colors.black26,
                                   fontSize: 18,
@@ -432,7 +441,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               controller: _timeController,
                               validator: (value) {
                                 if (value!.isEmpty)
-                                  return 'Please Enter the Time';
+                                  return 'نرجو منك ادخال الوقت ';
                                 return null;
                               },
                               onFieldSubmitted: (String value) {
@@ -492,7 +501,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             }
                           },
                           child: Text(
-                            "Book Appointment",
+                            "احجز موعد",
                             style: GoogleFonts.lato(
                               color: Colors.white,
                               fontSize: 18,
@@ -516,21 +525,16 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<void> _createAppointment() async {
-    print(dateUTC + ' ' + date_Time + ':00');
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(user.email)
-        .collection('pending')
-        .doc()
-        .set({
-      'name': _nameController.text,
-      'phone': _phoneController.text,
-      'description': _descriptionController.text,
-      'doctor': _doctorController.text,
-      'padding': "false",
+   /*
+   *  print(dateUTC + ' ' + date_Time + ':00');
+    FirebaseFirestore.instance.collection('appointments').doc(user.email).collection('pending').doc().set({'name': _nameController.text, 'phone': _phoneController.text, 'description': _descriptionController.text, 'doctor': _doctorController.text, 'padding': "false",
 
       'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
     }, SetOptions(merge: true));
+   *
+   *
+   *
+   * */
 
     FirebaseFirestore.instance
         .collection('appointments')
@@ -543,6 +547,7 @@ class _BookingScreenState extends State<BookingScreen> {
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
       'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+
     }, SetOptions(merge: true));
   }
 }

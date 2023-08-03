@@ -269,7 +269,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               );
                             },
                             child: Text(
-                              'Book an Appointment',
+                              'احجز موعد',
                               style: GoogleFonts.lato(
                                 color: Colors.white,
                                 fontSize: 16,

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +9,19 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 import 'firebaseAuth.dart';
 
+
+
+Future<String> _getUser() async {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  String userType = '' ;
+  var user = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(_auth.currentUser!.uid)
+      .get() ;
+  debugPrint('this is the $userType');
+  userType = user.data()!['userType'].toString() ;
+  return userType;
+}
 class Skip extends StatefulWidget {
   @override
   _SkipState createState() => _SkipState();

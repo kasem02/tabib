@@ -38,7 +38,7 @@ class Carouselslider extends StatelessWidget {
                       }))
                     : Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return DiseaseDetail(disease: 'Covid-19');
+                        return DiseaseDetail(disease: 'الخدمات والاسعار');
                       }));
               },
               child: Stack(

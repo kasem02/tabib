@@ -17,6 +17,8 @@ class _RegisterState extends State<Register> {
   final TextEditingController _displayName = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String dropdownValue = 'doctor';
+
   final TextEditingController _passwordConfirmController =
       TextEditingController();
 
@@ -241,6 +243,29 @@ class _RegisterState extends State<Register> {
               },
               obscureText: true,
             ),
+        // Step 1.
+// Step 2.
+      DropdownButton<String>(
+        // Step 3.
+        value: dropdownValue,
+        // Step 4.
+        items: <String>['doctor', 'pation']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: TextStyle(fontSize: 30),
+            ),
+          );
+        }).toList(),
+        // Step 5.
+        onChanged: (String? newValue) {
+          setState(() {
+            dropdownValue = newValue!;
+          });
+        },
+      ),
             Container(
               padding: const EdgeInsets.only(top: 25.0),
               child: SizedBox(
@@ -455,6 +480,8 @@ class _RegisterState extends State<Register> {
         'phone': null,
         'bio': null,
         'city': null,
+        'userType' : dropdownValue,
+
       }, SetOptions(merge: true));
 
       Navigator.of(context)
