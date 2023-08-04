@@ -205,7 +205,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 width: 20,
                               ),
                               Text(
-                                'Working Hours',
+                                'ساعات العمل',
                                 style: GoogleFonts.lato(
                                   fontSize: 16,
                                 ),
@@ -222,7 +222,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: Row(
                             children: [
                               Text(
-                                'Today: ',
+                                'اليوم: ',
                                 style: GoogleFonts.lato(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -264,6 +264,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 MaterialPageRoute(
                                   builder: (context) => BookingScreen(
                                     doctor: document['name'],
+                                    doctormail: document['doctormail'],
+
                                   ),
                                 ),
                               );

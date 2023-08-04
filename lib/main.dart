@@ -12,6 +12,8 @@ import 'package:health_and_doctor_appointment/screens/userProfile.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'screens/doctor_bar.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -63,9 +65,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: user == "doctor" ? '/doctor_home' : '/home',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => Skip(),
-        '/login': (context) => FireBaseAuth(),
-        '/home': (context) => user == 'doctor' ? Doctormain() : MainPage(),
+        '/': (context) => user == 'doctor' ? doctor_bar() : (user == 'pation' ? MainPage() : (user.isEmpty ? Skip() : MainPage())),
+        '/home': (context) => user == 'doctor' ? doctor_bar() : MainPage(),
         '/profile': (context) => UserProfile(),
         '/MyAppointments': (context) => MyAppointments(),
         '/DoctorProfile': (context) => DoctorProfile(),

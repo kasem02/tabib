@@ -7,11 +7,20 @@ import 'package:intl/intl.dart';
 
 class BookingScreen extends StatefulWidget {
   final String doctor;
+  final String doctormail;
 
-  const BookingScreen({Key? key, required this.doctor}) : super(key: key);
+
+
+  const BookingScreen({Key? key, required this.doctor,required this.doctormail}) : super(key: key);
   @override
   _BookingScreenState createState() => _BookingScreenState();
 }
+FirebaseAuth _auth = FirebaseAuth.instance;
+late User? user;
+Future<void> _getUser() async {
+  user = _auth.currentUser!;
+}
+
 
 class _BookingScreenState extends State<BookingScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -19,6 +28,7 @@ class _BookingScreenState extends State<BookingScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _doctorController = TextEditingController();
+  final TextEditingController _MailController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
@@ -138,6 +148,8 @@ class _BookingScreenState extends State<BookingScreen> {
       selectTime(context);
     });
     _doctorController.text = widget.doctor;
+    _MailController.text = widget.doctormail;
+    _nameController.text =  user!.displayName!;
   }
 
   @override
@@ -203,6 +215,8 @@ class _BookingScreenState extends State<BookingScreen> {
                       TextFormField(
                         controller: _nameController,
                         focusNode: f1,
+                        textAlign: TextAlign.center,
+
                         validator: (value) {
                           if (value!.isEmpty) return 'ادخل اسم المريض';
                           return null;
@@ -219,11 +233,14 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                           filled: true,
                           fillColor: Colors.grey[350],
-                          hintText: 'اسم الطبيب',
+                          hintText: 'اسم المريض',
+
                           hintStyle: GoogleFonts.lato(
                             color: Colors.black26,
                             fontSize: 18,
+
                             fontWeight: FontWeight.w800,
+
                           ),
                         ),
                         onFieldSubmitted: (String value) {
@@ -238,6 +255,8 @@ class _BookingScreenState extends State<BookingScreen> {
                       TextFormField(
                         keyboardType: TextInputType.phone,
                         focusNode: f2,
+                        textAlign: TextAlign.center,
+
                         controller: _phoneController,
                         style: GoogleFonts.lato(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -276,8 +295,52 @@ class _BookingScreenState extends State<BookingScreen> {
                         height: 20,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        focusNode: f2,
+                        textAlign: TextAlign.center,
+
+                        controller: _MailController,
+                        style: GoogleFonts.lato(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                        decoration: InputDecoration(
+                          contentPadding:
+                          EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(90.0)),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[350],
+                          hintText: 'ايميل الطبيب',
+                          hintStyle: GoogleFonts.lato(
+                            color: Colors.black26,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'ادخل رقم الهاتف';
+                          } else if (value.length < 10) {
+                            return 'هنالك خطا في رقم الهاتف';
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (String value) {
+                          f2.unfocus();
+                          FocusScope.of(context).requestFocus(f3);
+                        },
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
                         focusNode: f3,
                         controller: _descriptionController,
+                        textAlign: TextAlign.center,
+
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         style: GoogleFonts.lato(
@@ -310,7 +373,9 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                       TextFormField(
                         controller: _doctorController,
-                        initialValue: user!.displayName!,
+                  //      initialValue: user!.displayName!,
+                        textAlign: TextAlign.center,
+
                         validator: (value) {
                           if (value!.isEmpty) return 'ادخل اسم الطبيب';
                           return null;
@@ -327,7 +392,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                           filled: true,
                           fillColor: Colors.grey[350],
-                          hintText: 'Doctor Name*',
+                          hintText: 'اسم الطبيب*',
                           hintStyle: GoogleFonts.lato(
                             color: Colors.black26,
                             fontSize: 18,
@@ -347,6 +412,8 @@ class _BookingScreenState extends State<BookingScreen> {
                           children: [
                             TextFormField(
                               focusNode: f4,
+                              textAlign: TextAlign.center,
+
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                   left: 20,
@@ -360,7 +427,8 @@ class _BookingScreenState extends State<BookingScreen> {
                                 ),
                                 filled: true,
                                 fillColor: Colors.grey[350],
-                                hintText: 'Select Date*',
+                                hintText: 'اختار التاريخ*',
+
                                 hintStyle: GoogleFonts.lato(
                                   color: Colors.black26,
                                   fontSize: 18,
@@ -418,6 +486,8 @@ class _BookingScreenState extends State<BookingScreen> {
                           children: [
                             TextFormField(
                               focusNode: f5,
+                              textAlign: TextAlign.center,
+
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                   left: 20,
@@ -546,7 +616,9 @@ class _BookingScreenState extends State<BookingScreen> {
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
+      'doctormail': _doctorController.text,
       'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
+      'approved': 'false',
 
     }, SetOptions(merge: true));
   }
