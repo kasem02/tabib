@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
   List<Widget> _pages = [
-    HomePage(),
+     HomePage(),
      DoctorsList(),
      MyAppointments(),
      UserProfile(),

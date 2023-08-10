@@ -26,26 +26,14 @@ Future<void> main() async {
 
 // ignore: must_be_immutable
 class MyApp extends StatefulWidget {
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
-String userType = '' ;
 
-Future<String> _getUser() async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  var user = await FirebaseFirestore.instance
-      .collection('users')
-      .doc(_auth.currentUser!.uid)
-      .get() ;
- var userType =  user.data()!['userType'].toString() ;
-  debugPrint('this is the get user function $userType');
-
-  return userType;
-}
 class _MyAppState extends State<MyApp> {
-  FirebaseAuth _auth = FirebaseAuth.instance ;
-  String user = '';
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late String user = '';
+  bool loggedIn = false;
 
   @override
   void initState() {
@@ -53,30 +41,37 @@ class _MyAppState extends State<MyApp> {
     _getUser().then((value) {
       setState(() {
         user = value;
-        debugPrint("inti stat $user");
-
+        loggedIn = user == 'doctor' || user == 'pation';
       });
     });
+  }
+
+  Future<String> _getUser() async {
+    var user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .get();
+    var userType = user.data()!['userType'].toString();
+    debugPrint('this is the get user function $userType');
+
+    return userType;
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: user == "doctor" ? '/doctor_home' : '/home',
+      initialRoute: loggedIn ? (user == 'doctor' ? '/doctor_home' : '/home') : '/',
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => user == 'doctor' ? doctor_bar() : (user == 'pation' ? MainPage() : (user.isEmpty ? Skip() : MainPage())),
-        '/home': (context) => user == 'doctor' ? doctor_bar() : MainPage(),
+        '/': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : MainPage()) : Skip(),
+        '/home': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'pation' ? FireBaseAuth() : Skip())) : Skip(),
         '/profile': (context) => UserProfile(),
         '/MyAppointments': (context) => MyAppointments(),
         '/DoctorProfile': (context) => DoctorProfile(),
         '/Doctormain': (context) => DoctorProfile(),
-
         '/doctor_home': (context) => Doctormain(),
       },
       theme: ThemeData(brightness: Brightness.light),
       debugShowCheckedModeBanner: false,
-      //home: FirebaseAuthDemo(),
     );
   }
 }

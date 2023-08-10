@@ -21,8 +21,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
   Future<void> deleteAppointment(String docID) {
     return FirebaseFirestore.instance
         .collection('appointments')
-        .doc(user.email.toString())
-        .collection('pending')
         .doc(docID)
         .delete();
   }
@@ -105,8 +103,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('appointments')
-            .doc(user.email.toString())
-            .collection('pending')
             .orderBy('date')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -190,7 +186,11 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "اسم المريض: " + document['name'],
+                                        document['approved'] == 'onhold'
+                                            ? 'قيد الانتظار'
+                                            : document['approved'] == 'true'
+                                            ? 'تمت الموافقة'
+                                            : 'تم رفض الموعد',
                                         style: GoogleFonts.lato(
                                           fontSize: 16,
                                         ),
@@ -209,6 +209,13 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                                           fontSize: 16,
                                         ),
                                       ),
+                                      Text(
+                                        "اسم المريض: " + document['name'],
+                                        style: GoogleFonts.lato(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+
                                     ],
                                   ),
                                   IconButton(

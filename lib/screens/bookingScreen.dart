@@ -37,6 +37,8 @@ class _BookingScreenState extends State<BookingScreen> {
   FocusNode f3 = FocusNode();
   FocusNode f4 = FocusNode();
   FocusNode f5 = FocusNode();
+  FocusNode f6 = FocusNode();
+  FocusNode f7 = FocusNode();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
@@ -296,7 +298,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        focusNode: f2,
+                        focusNode: f3,
                         textAlign: TextAlign.center,
 
                         controller: _MailController,
@@ -337,7 +339,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         height: 20,
                       ),
                       TextFormField(
-                        focusNode: f3,
+                        focusNode: f4,
                         controller: _descriptionController,
                         textAlign: TextAlign.center,
 
@@ -372,6 +374,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         height: 20,
                       ),
                       TextFormField(
+                        focusNode: f5,
                         controller: _doctorController,
                   //      initialValue: user!.displayName!,
                         textAlign: TextAlign.center,
@@ -411,7 +414,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           alignment: Alignment.centerRight,
                           children: [
                             TextFormField(
-                              focusNode: f4,
+                              focusNode: f6,
                               textAlign: TextAlign.center,
 
                               decoration: InputDecoration(
@@ -442,7 +445,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 return null;
                               },
                               onFieldSubmitted: (String value) {
-                                f4.unfocus();
+                                f6.unfocus();
                                 FocusScope.of(context).requestFocus(f5);
                               },
                               textInputAction: TextInputAction.next,
@@ -485,7 +488,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           alignment: Alignment.centerRight,
                           children: [
                             TextFormField(
-                              focusNode: f5,
+                              focusNode: f7,
                               textAlign: TextAlign.center,
 
                               decoration: InputDecoration(
@@ -515,7 +518,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 return null;
                               },
                               onFieldSubmitted: (String value) {
-                                f5.unfocus();
+                                f7.unfocus();
                               },
                               textInputAction: TextInputAction.next,
                               style: GoogleFonts.lato(
@@ -608,17 +611,16 @@ class _BookingScreenState extends State<BookingScreen> {
 
     FirebaseFirestore.instance
         .collection('appointments')
-        .doc(user.email)
-        .collection('all')
         .doc()
         .set({
       'name': _nameController.text,
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
-      'doctormail': _doctorController.text,
+      'doctormail': _MailController.text,
+      'pathionmail' : user!.email!,
       'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
-      'approved': 'false',
+      'approved': 'onhold',
 
     }, SetOptions(merge: true));
   }

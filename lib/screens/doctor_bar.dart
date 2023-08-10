@@ -16,6 +16,7 @@ import 'package:quick_actions/quick_actions.dart';
 import 'Doctormain.dart';
 import 'Doctorsettings.dart';
 import 'docotrProfPage.dart';
+import 'mydoctorappoinment.dart';
 
 class doctor_bar extends StatefulWidget {
   const doctor_bar({Key? key}) : super(key: key);
@@ -115,9 +116,10 @@ class _doctor_barState extends State<doctor_bar> {
                     text: 'الرئسية',
                   ),
                   GButton(
-                    icon: FlutterIcons.search1_ant,
-                    text: 'البحث',
+                    icon: FlutterIcons.doctor_mco,
+                    text: 'حسابي',
                   ),
+
 
                 ],
                 selectedIndex: _selectedIndex,

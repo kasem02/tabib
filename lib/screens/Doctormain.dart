@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
+import 'doctorapprovedApoinemt.dart';
+import 'mydoctorappoinment.dart';
+
 class Doctormain extends StatefulWidget {
   const Doctormain({Key? key}) : super(key: key);
 
@@ -24,41 +27,21 @@ class Doctormain extends StatefulWidget {
 class _DoctormainState extends State<Doctormain> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Doctor Main'),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('users').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (!snapshot.hasData) {
-            return Text("No data available");
-          }
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (BuildContext context, int index) {
-              DocumentSnapshot document = snapshot.data!.docs[index];
-              return Card(
-                child: ListTile(
-                  title: Text(document['name']),
-                  subtitle: Text(document['email']),
-                  onTap: () {
+    return MaterialApp(
+        home: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Learning Tabs'),
+              bottom: const TabBar(tabs: [
+                Tab(icon: Icon(Icons.pending), text: 'pendding Appintment'),
+                Tab(icon: Icon(Icons.done), text: 'Approved'),
+                Tab(icon: Icon(Icons.done), text: 'Cancelled'),
 
-
-                    // Do something when the tile is tapped
-                  },
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
+              ]),
+            ),
+            body: const TabBarView(children: [mydcotorappiment(),doctoraprrvedappmoent()]),
+          ),
+        ));
   }
 }
