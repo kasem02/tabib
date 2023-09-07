@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
@@ -7,15 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:health_and_doctor_appointment/screens/bookingScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DoctorProfile extends StatefulWidget {
+class advetisemant extends StatefulWidget {
   final String? doctor;
 
-  const DoctorProfile({Key? key,  this.doctor}) : super(key: key);
+  const advetisemant({Key? key,  this.doctor}) : super(key: key);
   @override
-  _DoctorProfileState createState() => _DoctorProfileState();
+  _advetisemantState createState() => _advetisemantState();
 }
 
-class _DoctorProfileState extends State<DoctorProfile> {
+class _advetisemantState extends State<advetisemant> {
   _launchCaller(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -31,7 +30,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection('doctors').orderBy('name').startAt([widget.doctor]).endAt(
-                  [widget.doctor! + '\uf8ff']).snapshots(),
+              [widget.doctor! + '\uf8ff']).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -80,7 +79,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           height: 20,
                         ),
                         Text(
-                          document['name'].isEmpty ? "لم تتم الاضافة بعد" : document['name'],
+                          document['name'],
                           style: GoogleFonts.lato(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
@@ -92,17 +91,46 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         Text(
                           document['type'],
                           style: GoogleFonts.lato(
-                              //fontWeight: FontWeight.bold,
+                            //fontWeight: FontWeight.bold,
                               fontSize: 18,
                               color: Colors.black54),
                         ),
                         SizedBox(
                           height: 16,
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for (var i = 0; i < document['rating']; i++)
+                              Icon(
+                                Icons.star_rounded,
+                                color: Colors.indigoAccent,
 
+                                size: 30,
+                              ),
+                            if (5 - document['rating'] > 0)
+                              for (var i = 0; i < 5 - document['rating']; i++)
+                                Icon(
+                                  Icons.star_rounded,
+                                  color: Colors.black12,
+                                  size: 30,
+                                ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14,
+                        ),
                         Container(
                           padding: EdgeInsets.only(left: 22, right: 22),
                           alignment: Alignment.center,
+                          child: Text(
+                            document['specification'],
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 20,
@@ -118,15 +146,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               SizedBox(
                                 width: 15,
                               ),
-                              Icon(Icons.info),
+                              Icon(Icons.place_outlined),
                               SizedBox(
                                 width: 20,
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 child: Text(
-                                  document['description'].isEmpty ? "لم تتم الاضافة بعد" : document['description'],
-
+                                  document['address'],
                                   style: GoogleFonts.lato(
 
                                     fontSize: 16,
@@ -169,7 +196,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         SizedBox(
                           height: 0,
                         ),
-
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
@@ -181,52 +207,42 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               SizedBox(
                                 width: 20,
                               ),
-
-                              SizedBox(
-                                width: 20,
-                              ),
                               Text(
-                                document['Period'] ,
+                                'ساعات العمل',
                                 style: GoogleFonts.lato(
-                                  fontSize: 17,
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
                           ),
-
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.only(left: 60),
                           child: Row(
                             children: [
-                              SizedBox(
-                                width: 15,
+                              Text(
+                                'اليوم: ',
+                                style: GoogleFonts.lato(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              Icon(Icons.access_time_rounded),
                               SizedBox(
-                                width: 20,
-                              ),
-
-                              SizedBox(
-                                width: 20,
+                                width: 10,
                               ),
                               Text(
-                                document['Period'] ,
+                                document['openHour'] + " - " + document['closeHour'],
                                 style: GoogleFonts.lato(
                                   fontSize: 17,
                                 ),
                               ),
                             ],
                           ),
-
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-
                         SizedBox(
                           height: 50,
                         ),

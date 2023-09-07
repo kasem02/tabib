@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
+import 'doctorCancledappointment.dart';
 import 'doctorapprovedApoinemt.dart';
 import 'mydoctorappoinment.dart';
 
@@ -32,7 +33,7 @@ class _DoctormainState extends State<Doctormain> {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Learning Tabs'),
+              title: const Text('Doctor Dashbord'),
               bottom: const TabBar(tabs: [
                 Tab(icon: Icon(Icons.pending), text: 'pendding Appintment'),
                 Tab(icon: Icon(Icons.done), text: 'Approved'),
@@ -40,7 +41,7 @@ class _DoctormainState extends State<Doctormain> {
 
               ]),
             ),
-            body: const TabBarView(children: [mydcotorappiment(),doctoraprrvedappmoent()]),
+            body: const TabBarView(children: [mydcotorappiment(),doctoraprrvedappmoent(),doctorcansledappmoent()]),
           ),
         ));
   }

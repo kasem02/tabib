@@ -35,10 +35,7 @@ class _ExploreListState extends State<ExploreList> {
         padding: EdgeInsets.only(top: 10),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('doctors')
-              .orderBy('type')
-              .startAt([widget.type]).endAt(
-                  [widget.type + '\uf8ff']).snapshots(),
+              .collection('doctors').orderBy('type').startAt([widget.type]).endAt([widget.type + '\uf8ff']).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -124,14 +121,7 @@ class _ExploreListState extends State<ExploreList> {
                                     SizedBox(
                                       width: 3,
                                     ),
-                                    Text(
-                                      doctor['rating'].toString(),
-                                      style: GoogleFonts.lato(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.indigo,
-                                      ),
-                                    ),
+
                                   ],
                                 ),
                               ),

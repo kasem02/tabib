@@ -25,7 +25,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('disease')
+              .collection('serives')
               .orderBy('Name')
               .startAt([widget.disease]).endAt(
                   [widget.disease + '\uf8ff']).snapshots(),
@@ -74,24 +74,9 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'How does it spread?',
-                                    style: GoogleFonts.lato(
-                                        color: Colors.black87,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  Text(
-                                    document['Spread'],
-                                    style: GoogleFonts.lato(
-                                      color: Colors.black54,
-                                      fontSize: 18,
-                                    ),
-                                  )
                                 ],
                               )),
 

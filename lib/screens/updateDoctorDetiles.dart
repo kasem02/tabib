@@ -119,7 +119,7 @@ class _updatedoctorDetilsState extends State<updatedoctorDetils> {
                   ),
                 ),
                 child: Text(
-                  'Update',
+                  'تحديث',
                   style: GoogleFonts.lato(
                       color: Colors.white,
                       fontSize: 18,

@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'screens/doctor_bar.dart';
+import 'screens/staaf_bar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  late String user = '';
+  late String? user = '';
   bool loggedIn = false;
 
   @override
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
     _getUser().then((value) {
       setState(() {
         user = value;
-        loggedIn = user == 'doctor' || user == 'pation';
+        loggedIn = user == 'doctor' || user == 'patient';
       });
     });
   }
@@ -60,15 +61,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: loggedIn ? (user == 'doctor' ? '/doctor_home' : '/home') : '/',
+      initialRoute: loggedIn ? (user == 'doctor' ? '/doctor_home' : (user == 'staff' ? '/staff_home' : '/home')) : '/',
       routes: {
-        '/': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : MainPage()) : Skip(),
-        '/home': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'pation' ? FireBaseAuth() : Skip())) : Skip(),
+        '/': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'staff' ? staff_bar() : MainPage())) : Skip(),
+        '/home': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'patient' ? FireBaseAuth() : (user == 'staff' ? staff_bar() : staff_bar()))) : Skip(),
         '/profile': (context) => UserProfile(),
         '/MyAppointments': (context) => MyAppointments(),
+        '/login': (context) => FireBaseAuth(),
         '/DoctorProfile': (context) => DoctorProfile(),
         '/Doctormain': (context) => DoctorProfile(),
         '/doctor_home': (context) => Doctormain(),
+        '/staff_home': (context) => staff_bar(),
       },
       theme: ThemeData(brightness: Brightness.light),
       debugShowCheckedModeBanner: false,

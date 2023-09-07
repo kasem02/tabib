@@ -15,10 +15,7 @@ class _TopRatedListState extends State<TopRatedList> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('doctors')
-            .orderBy('rating', descending: true)
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection('doctors').orderBy('name', descending: true).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -37,7 +34,6 @@ class _TopRatedListState extends State<TopRatedList> {
     if (snapshot.hasData && index < snapshot.data!.docs.length) {
 
       DocumentSnapshot doctor = snapshot.data!.docs[index];
-      print("this is the fucking doctor" + index.toString() );
       return Padding(
         padding: const EdgeInsets.only(top: 3.0),
         child: Card(
@@ -66,8 +62,9 @@ class _TopRatedListState extends State<TopRatedList> {
                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(doctor['image']),
-                    //backgroundColor: Colors.blue,
+                    backgroundImage: doctor['image'] != null
+                        ? NetworkImage(doctor['image'])
+                        : AssetImage('assets/doc.png') as ImageProvider,
                     radius: 25,
                   ),
                   SizedBox(
@@ -86,10 +83,14 @@ class _TopRatedListState extends State<TopRatedList> {
                         ),
                       ),
                       Text(
-                        doctor['type'],
+                        doctor['type'] != null
+                            ? doctor['type']
+                            : "لم يتم ادخال المعلومات بعد",
                         style: GoogleFonts.lato(
-                            fontSize: 16, color: Colors.black54),
-                      ),
+                          fontSize: 16,
+                          color: Colors.black54,
+                        ),
+                      )
                     ],
                   ),
                   SizedBox(
@@ -108,14 +109,6 @@ class _TopRatedListState extends State<TopRatedList> {
                             color: Colors.indigo[400],
                           ),
                           SizedBox(width: 3,),
-                          Text(
-                            doctor['rating'].toString(),
-                            style: GoogleFonts.lato(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.indigo,
-                            ),
-                          ),
                         ],
                       ),
                     ),

@@ -21,19 +21,19 @@ class _doctorDetiailsState extends State<doctorDetiails> {
   }
 
   List labelName = [
-    'Name1',
+    'Name',
     'Email',
     'Mobile Number',
-    'openHour',
-    'closeHour',
+    'type',
+    'Period'
   ];
 
   List value = [
     'name',
     'doctormail',
     'phone',
-    'openHour',
-    'closeHour',
+    'type',
+    'Period',
   ];
 
   @override
@@ -47,10 +47,7 @@ class _doctorDetiailsState extends State<doctorDetiails> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('doctors')
-            .doc(user.uid)
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection('doctors').doc(user.uid).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -62,7 +59,7 @@ class _doctorDetiailsState extends State<doctorDetiails> {
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             children: List.generate(
-              5, // Changed from 6 to 5
+              4, // Changed from 6 to 5
                   (index) => Container(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: InkWell(
@@ -101,7 +98,7 @@ class _doctorDetiailsState extends State<doctorDetiails> {
                           ),
                           Text(
                             userData[value[index]]?.isEmpty ?? true
-                                ? 'Not Added'
+                                ? 'لم تتم الاضافه'
                                 : userData[value[index]],
                             style: GoogleFonts.lato(
                               color: Colors.black54,

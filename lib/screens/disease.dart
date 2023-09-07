@@ -29,81 +29,53 @@ class _DiseaseState extends State<Disease> {
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('disease')
+            .collection('serives')
             .orderBy('Name')
             .startAt([''])
             .endAt(['' + '\uf8ff'])
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            return ListView(
-              physics: BouncingScrollPhysics(),
-              children: snapshot.data!.docs.map((document) {
+            return ListView.builder(
+              physics: ClampingScrollPhysics(),
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                var document = snapshot.data!.docs[index];
                 print('this is the main doc' + document['Name'].toString());
-                return Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(left: 10, right: 10, top: 0),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 10,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.black87,
-                        width: 0.2,
+                return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DiseaseDetail(disease: document['Name'],
+                        ),
                       ),
+                    );
+                  },
+                  title: Text(
+                    document['Name'],
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black87,
                     ),
                   ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DiseaseDetail(
-                            disease: document['Name'],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                document['Name'],
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.lato(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              Text(
-                                document['Symtomps'],
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  subtitle: Text(
+                    document['Availability'],
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      fontSize: 14,
+                      color: Colors.black54,
                     ),
                   ),
                 );
-              }).toList(),
+              },
             );
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
-                'مشكله في استقبال البيانات نرجو المحاوله بعد القليل',
+                'مشكلة في استقبال البيانات. يرجى المحاولة مرة أخرى في وقت لاحق.',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.red,

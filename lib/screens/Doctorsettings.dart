@@ -62,7 +62,7 @@ class _doctorsettingsState extends State<doctorsettings> {
           ),
         ),
         title: Text(
-          'Dcotor Settings',
+          'تعديل معلومات',
           style: GoogleFonts.lato(
               color: Colors.indigo, fontSize: 20, fontWeight: FontWeight.bold),
         ),
@@ -87,7 +87,7 @@ class _doctorsettingsState extends State<doctorsettings> {
               },
               style: TextButton.styleFrom(primary: Colors.grey),
               child: Text(
-                'Sign out',
+                'تسجيل الخروج',
                 style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 16,

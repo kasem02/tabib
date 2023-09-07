@@ -100,7 +100,7 @@ class _RegisterState extends State<Register> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Name',
+                hintText: 'الاسم',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -136,7 +136,7 @@ class _RegisterState extends State<Register> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Email',
+                hintText: 'البريد الاكتروني',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -178,7 +178,7 @@ class _RegisterState extends State<Register> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Password',
+                hintText: 'كلمة السر',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -221,7 +221,7 @@ class _RegisterState extends State<Register> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Confirm Password',
+                hintText: 'تاكيد كلمه السر',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -249,13 +249,8 @@ class _RegisterState extends State<Register> {
         // Step 3.
         value: dropdownValue,
         // Step 4.
-        items: <String>['doctor', 'pation']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              style: TextStyle(fontSize: 30),
+        items: <String>['doctor', 'patient'].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(value: value, child: Text(value,style: TextStyle(fontSize: 30),
             ),
           );
         }).toList(),
@@ -473,19 +468,41 @@ class _RegisterState extends State<Register> {
       }
       await user.updateProfile(displayName: _displayName.text);
 
-      FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-        'name': _displayName.text,
-        'birthDate': null,
-        'email': user.email,
-        'phone': null,
-        'bio': null,
-        'city': null,
-        'userType' : dropdownValue,
+      if(dropdownValue=='doctor'){
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'name': _displayName.text,
+          'email': user.email,
+          'phone': null,
+          'city': null,
+          'userType' : dropdownValue,
 
-      }, SetOptions(merge: true));
+        }, SetOptions(merge: true));
+        FirebaseFirestore.instance.collection('doctors').doc(user.uid).set({
+          'name': _displayName.text,
+          'doctormail': user.email,
+          'phone': '',
+          'description': '',
+          'type' : '',
+          'image' : 'https://img.freepik.com/premium-vector/doctor-icon-avatar-white_136162-58.jpg',
+          'Period':'',
+        }, SetOptions(merge: true));
 
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+
+      }else {
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'name': _displayName.text,
+          'birthDate': null,
+          'email': user.email,
+          'phone': null,
+          'bio': null,
+          'city': null,
+          'userType' : dropdownValue,
+
+        }, SetOptions(merge: true));
+
+
+      }
+      Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
     } else {
       _isSuccess = false;
     }

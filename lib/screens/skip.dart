@@ -15,10 +15,8 @@ Future<String> _getUser() async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   String userType = '' ;
   var user = await FirebaseFirestore.instance
-      .collection('users')
-      .doc(_auth.currentUser!.uid)
-      .get() ;
-  debugPrint('this is the $userType');
+      .collection('users').doc(_auth.currentUser!.uid).get() ;
+  debugPrint('this is the usertype $userType');
   userType = user.data()!['userType'].toString() ;
   return userType;
 }
@@ -46,7 +44,7 @@ class _SkipState extends State<Skip> {
                   GoogleFonts.lato(fontSize: 30, fontWeight: FontWeight.w900),
             ),
             Text(
-              'Find popular doctors nearby you',
+              'ابحث في تطبيقنا عن افضل الاطباء المتخصصين في المجال',
               style: GoogleFonts.lato(
                   fontSize: 15,
                   color: Colors.grey[500],
@@ -66,16 +64,9 @@ class _SkipState extends State<Skip> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'ابحث عن امراض',
+              'لدينا افضل الخدماتنا والاسعار',
               style:
                   GoogleFonts.lato(fontSize: 30, fontWeight: FontWeight.w900),
-            ),
-            Text(
-              'Find information about disease',
-              style: GoogleFonts.lato(
-                  fontSize: 15,
-                  color: Colors.grey[500],
-                  fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -97,7 +88,7 @@ class _SkipState extends State<Skip> {
           child: Card(
             child: Center(
               child: Text(
-                'Skip',
+                'تخطي',
                 textAlign: TextAlign.center,
                 style:
                     GoogleFonts.lato(fontSize: 25, fontWeight: FontWeight.w900),
@@ -115,7 +106,7 @@ class _SkipState extends State<Skip> {
           child: Card(
             child: Center(
               child: Text(
-                'Continue',
+                'الاستمرار',
                 textAlign: TextAlign.center,
                 style:
                     GoogleFonts.lato(fontSize: 15, fontWeight: FontWeight.w900),

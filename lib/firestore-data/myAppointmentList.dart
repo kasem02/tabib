@@ -55,8 +55,8 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Confirm Delete"),
-      content: Text("Are you sure you want to delete this Appointment?"),
+      title: Text("تاكيد الموعد"),
+      content: Text("هل انت متاكد من حدف هدا الموعد"),
       actions: [
         cancelButton,
         continueButton,
@@ -114,7 +114,7 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
           return snapshot.data?.size == 0
               ? Center(
                   child: Text(
-                    'No Appointment Scheduled',
+                    'لا توجد مواعيد لعرضها ',
                     style: GoogleFonts.lato(
                       color: Colors.grey,
                       fontSize: 18,
@@ -153,7 +153,7 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                               Text(
                                 _compareDate(
                                         document['date'].toDate().toString())
-                                    ? "TODAY"
+                                    ? "اليوم"
                                     : "",
                                 style: GoogleFonts.lato(
                                     color: Colors.green,

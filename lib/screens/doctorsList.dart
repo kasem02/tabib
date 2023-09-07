@@ -32,7 +32,7 @@ class _DoctorsListState extends State<DoctorsList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Find Doctors'),
+        title: Text('ابحث عن اطباء'),
         actions: <Widget>[
           SafeArea(
             child: Container(
@@ -120,7 +120,7 @@ class _DoctorsListState extends State<DoctorsList> {
                           });
                         },
                         child: Text(
-                          'Show All',
+                          'اظهر الكل',
                           style: GoogleFonts.lato(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

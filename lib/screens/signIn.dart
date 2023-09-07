@@ -62,8 +62,7 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               width: double.infinity,
               child: Container(
-                child: Image.asset(
-                  'assets/vector-doc2.jpg',
+                child: Image.asset('assets/vector-doc2.jpg',
                   scale: 3.5,
                 ),
               ),
@@ -74,7 +73,7 @@ class _SignInState extends State<SignIn> {
             Container(
               padding: EdgeInsets.only(bottom: 25),
               child: Text(
-                'Login',
+                'تسجيل الدخول',
                 style: GoogleFonts.lato(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -97,7 +96,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Email',
+                hintText: 'البريد الالكتروني',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -111,9 +110,9 @@ class _SignInState extends State<SignIn> {
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter the Email';
+                  return 'نرجو منك ادخال البريد الالكتروني';
                 } else if (!emailValidate(value!)) {
-                  return 'Please enter correct Email';
+                  return 'البريد الالكتروني غير صحيح';
                 } else {
                   return null;
                 }
@@ -138,7 +137,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[350],
-                hintText: 'Password',
+                hintText: 'كلمة المرور',
                 hintStyle: GoogleFonts.lato(
                   color: Colors.black26,
                   fontSize: 18,
@@ -151,7 +150,7 @@ class _SignInState extends State<SignIn> {
               },
               textInputAction: TextInputAction.done,
               validator: (value) {
-                if (value!.isEmpty) return 'Please enter the Passord';
+                if (value!.isEmpty) return 'نرجو منك ادخال كلمه السر';
                 return null;
               },
               obscureText: true,
@@ -164,7 +163,7 @@ class _SignInState extends State<SignIn> {
                 child: ElevatedButton(
                   focusNode: f3,
                   child: Text(
-                    "Sign In",
+                    "تسجيل الدخول",
                     style: GoogleFonts.lato(
                       color: Colors.white,
                       fontSize: 18.0,
@@ -196,7 +195,7 @@ class _SignInState extends State<SignIn> {
                         MaterialStateProperty.all(Colors.transparent)),
                 onPressed: () {},
                 child: Text(
-                  'Forgot Password?',
+                  'هل نسيت كلمه السر ؟',
                   style: GoogleFonts.lato(
                     fontSize: 16,
                     color: Colors.black54,
@@ -248,7 +247,7 @@ class _SignInState extends State<SignIn> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      "هل لديك حساب في التطبيق ؟",
                       style: GoogleFonts.lato(
                         fontSize: 15.0,
                         fontWeight: FontWeight.w700,
@@ -260,7 +259,7 @@ class _SignInState extends State<SignIn> {
                               MaterialStateProperty.all(Colors.transparent)),
                       onPressed: () => _pushPage(context, Register()),
                       child: Text(
-                        'Signup here',
+                        'سجل في التطبيق ',
                         style: GoogleFonts.lato(
                           fontSize: 15,
                           color: Colors.indigo[700],
@@ -291,7 +290,7 @@ class _SignInState extends State<SignIn> {
         children: [
           CircularProgressIndicator(),
           Container(
-              margin: EdgeInsets.only(left: 15), child: Text("Loading...")),
+              margin: EdgeInsets.only(left: 15), child: Text("نرجو الانتظار قليلا")),
         ],
       ),
     );
@@ -339,7 +338,7 @@ class _SignInState extends State<SignIn> {
               Icons.info_outline,
               color: Colors.white,
             ),
-            Text(" There was a problem signing you in"),
+            Text(" هنالك مشكله في تسجيل دخولك "),
           ],
         ),
       );

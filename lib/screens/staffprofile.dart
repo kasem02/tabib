@@ -8,14 +8,16 @@ import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:health_and_doctor_appointment/firestore-data/appointmentHistoryList.dart';
 import 'package:health_and_doctor_appointment/screens/userSettings.dart';
 
-class UserProfile extends StatefulWidget {
-  const UserProfile({Key? key}) : super(key: key);
+import 'Doctorsettings.dart';
+
+class staffprofile extends StatefulWidget {
+  const staffprofile({Key? key}) : super(key: key);
 
   @override
-  _UserProfileState createState() => _UserProfileState();
+  State<staffprofile> createState() => _staffprofileState();
 }
 
-class _UserProfileState extends State<UserProfile> {
+class _staffprofileState extends State<staffprofile> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   FirebaseAuth _auth = FirebaseAuth.instance;
   late User? user;
@@ -23,7 +25,9 @@ class _UserProfileState extends State<UserProfile> {
   Future<void> _getUser() async {
     user = _auth.currentUser!;
   }
-
+  Future _signOut() async {
+    await _auth.signOut();
+  }
   @override
   void initState() {
     super.initState();
@@ -64,21 +68,6 @@ class _UserProfileState extends State<UserProfile> {
                         child: Container(
                           padding: EdgeInsets.only(top: 10, right: 7),
                           alignment: Alignment.topRight,
-                          child: IconButton(
-                            icon: Icon(
-                              FlutterIcons.gear_faw,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UserSettings(),
-                                ),
-                              );
-                            },
-                          ),
                         ),
                       ),
                       Container(
@@ -175,7 +164,7 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                         Text(
                           user!.phoneNumber?.isEmpty ?? true
-                              ? "Not Added"
+                              ? "لم يتم الاضافه"
                               : user!.phoneNumber!,
                           style: GoogleFonts.lato(
                             fontSize: 16,
@@ -183,6 +172,7 @@ class _UserProfileState extends State<UserProfile> {
                             color: Colors.black54,
                           ),
                         ),
+
                       ],
                     ),
                   ],
@@ -201,35 +191,26 @@ class _UserProfileState extends State<UserProfile> {
                   children: [
                     Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.indigo[600],
-                            child: Icon(
-                              FlutterIcons.pencil_ent,
-                              color: Colors.white,
-                              size: 16,
+                         TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/login', (Route<dynamic> route) => false);
+                            _signOut();
+                          },
+                          style: TextButton.styleFrom(primary: Colors.grey),
+                          child: Text(
+                            'Sign out',
+                            style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Bio',
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
+
                       ],
                     ),
-                    Container(
-                      child: getBio(),
-                    )
+
                   ],
                 ),
               ),
@@ -262,45 +243,11 @@ class _UserProfileState extends State<UserProfile> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          "تاريخ المواعيد",
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            alignment: Alignment.centerRight,
-                            child: SizedBox(
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text('View all'),
-                              ),
-                            ),
-                          ),
-                        )
+
                       ],
                     ),
                     SizedBox(
                       height: 10,
-                    ),
-                    Expanded(
-                      child: Scrollbar(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 35, right: 15),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                AppointmentHistoryList(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -315,35 +262,10 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  Widget getBio() {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('users')
-          .doc(user!.uid)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData)
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-     //   var userData = snapshot.data as Map<String, dynamic>;
-        var userData = snapshot.data as DocumentSnapshot;
-        return Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(top: 10, left: 40),
-          child: Text(
-
-
-           userData['bio'] == null ? "No Bio" : userData['bio'] ?? "No Bio"
-            ,
-            style: GoogleFonts.lato(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black38,
-            ),
-          ),
-        );
-      },
-    );
-  }
 }
+
+
+
+
+
+

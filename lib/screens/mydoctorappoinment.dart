@@ -99,7 +99,7 @@ class _mydcotorappimentState extends State<mydcotorappiment> {
     Widget continueButton = TextButton(
       child: Text("نعم"),
       onPressed: () {
-        showrefuseAlertDialog(_documentID as BuildContext);
+        refuseAppointment(_documentID);
         Navigator.of(context).pop();
       },
     );
@@ -210,7 +210,7 @@ class _mydcotorappimentState extends State<mydcotorappiment> {
                         ),
                         Text(
                           _compareDate(document['date'].toDate().toString())
-                              ? "TODAY"
+                              ? "اليوم"
                               : "",
                           style: GoogleFonts.lato(
                               color: Colors.green,

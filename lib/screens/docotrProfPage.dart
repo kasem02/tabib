@@ -264,27 +264,7 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          "Appointment History",
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            alignment: Alignment.centerRight,
-                            child: SizedBox(
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text('View all'),
-                              ),
-                            ),
-                          ),
-                        )
+
                       ],
                     ),
                     SizedBox(

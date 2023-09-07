@@ -55,11 +55,11 @@ class _HomePageState extends State<HomePage> {
     setState(
       () {
         if (hour >= 5 && hour < 12) {
-          _message = 'Good Morning';
+          _message = 'صباح الخير';
         } else if (hour >= 12 && hour <= 17) {
-          _message = 'Good Afternoon';
+          _message = 'مساء الخير';
         } else {
-          _message = 'Good Evening';
+          _message = 'مساء الخير';
         }
       },
     );
@@ -126,22 +126,29 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20, bottom: 10),
-                    child: Text(
-                      "Hello " + user.displayName!,
-                      style: GoogleFonts.lato(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                    child: Center(
+                      child: Text(
+                        user.displayName! + " " + "مرحبا بك  " ,
+                        style: GoogleFonts.lato(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.right,
+
                       ),
                     ),
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20, bottom: 25),
-                    child: Text(
-                      "Let's Find Your\nDoctor",
-                      style: GoogleFonts.lato(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        "لنجد لك طبيبك",
+                        style: GoogleFonts.lato(
+
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -159,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         filled: true,
                         fillColor: Colors.grey[200],
-                        hintText: 'Search doctor',
+                        hintText: 'البحث عن طبيب',
                         hintStyle: GoogleFonts.lato(
                           color: Colors.black26,
                           fontSize: 18,
@@ -221,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Specialists",
+                      "المتخصصين",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.lato(
                           color: Colors.blue[800],

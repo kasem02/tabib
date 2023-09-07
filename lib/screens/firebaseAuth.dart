@@ -23,7 +23,7 @@ class _FireBaseAuthState extends State<FireBaseAuth> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  "assets/image-medical.jpg",
+                  "assets/image-medical-old.jpg",
                 ),
                 fit: BoxFit.cover,
               ),

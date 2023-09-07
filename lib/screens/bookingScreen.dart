@@ -43,7 +43,7 @@ class _BookingScreenState extends State<BookingScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
   TimeOfDay currentTime = TimeOfDay.now();
-  String timeText = 'Select Time';
+  String timeText = 'اختار توقيد';
   late String dateUTC;
   late String date_Time;
 
@@ -113,7 +113,7 @@ class _BookingScreenState extends State<BookingScreen> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text(
-        "Done!",
+        "حسنا!",
         style: GoogleFonts.lato(
           fontWeight: FontWeight.bold,
         ),
