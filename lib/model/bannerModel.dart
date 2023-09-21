@@ -15,7 +15,7 @@ List<BannerModel> bannerCards = [
         Color(0xffa1d4ed),
         Color(0xffc0eaff),
       ],
-      "assets/414-bg.png"),
+      "assets/515.png"),
 
 
 

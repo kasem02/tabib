@@ -276,7 +276,7 @@ class _mydcotorappimentState extends State<mydcotorappiment> {
                             IconButton(
                               tooltip: 'قبول الموعد ',
                               icon: Icon(
-                                Icons.add_box,
+                                Icons.check,
                                 color: Colors.black87,
                               ),
                               onPressed: () {
@@ -286,9 +286,9 @@ class _mydcotorappimentState extends State<mydcotorappiment> {
                               },
                             ),
                             IconButton(
-                              tooltip: 'قبول الموعد ',
+                              tooltip: 'رفض الموعد ',
                               icon: Icon(
-                                Icons.add_circle_outline,
+                                Icons.close,
                                 color: Colors.black87,
                               ),
                               onPressed: () {

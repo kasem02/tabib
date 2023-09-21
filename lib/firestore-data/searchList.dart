@@ -22,8 +22,8 @@ class _SearchListState extends State<SearchList> {
           stream: FirebaseFirestore.instance
               .collection('doctors')
               .orderBy('name')
-              .startAt(['Dr. ' + widget.searchKey])
-              .endAt(['Dr. ' + widget.searchKey + '\uf8ff'])
+              .startAt([widget.searchKey])
+              .endAt([widget.searchKey + '\uf8ff'])
               .snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -41,11 +41,6 @@ class _SearchListState extends State<SearchList> {
             }
 
             // Print the data
-            snapshot.data?.docs.forEach((doc) {
-              print('Doctor name: ${doc['name']}');
-              print('Doctor type: ${doc['type']}');
-              // Add more fields as needed
-            });
 
             return snapshot.data?.size == 0
                 ? Center(

@@ -5,10 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:health_and_doctor_appointment/firestore-data/appointmentHistoryList.dart';
-import 'package:health_and_doctor_appointment/screens/userSettings.dart';
+import 'package:health_and_doctor_appointment/screens/Doctorsettingsupdate.dart';
 
-import 'Doctorsettings.dart';
 
 class doctorProfilepage extends StatefulWidget {
   const doctorProfilepage({Key? key}) : super(key: key);
@@ -30,6 +28,7 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
   void initState() {
     super.initState();
     _getUser();
+
   }
 
   @override
@@ -38,7 +37,7 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
+            overscroll.disallowIndicator();
             return true ;
           },
           child: ListView(
@@ -63,25 +62,7 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
                           ),
                         ),
                         height: MediaQuery.of(context).size.height / 5,
-                        child: Container(
-                          padding: EdgeInsets.only(top: 10, right: 7),
-                          alignment: Alignment.topRight,
-                          child: IconButton(
-                            icon: Icon(
-                              FlutterIcons.gear_faw,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => doctorsettings(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                        child: getdata(),
                       ),
                       Container(
                         alignment: Alignment.center,
@@ -161,135 +142,16 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.blue[800],
-                            child: Icon(
-                              Icons.phone,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
                         ),
                         SizedBox(
                           width: 10,
-                        ),
-                        Text(
-                          user!.phoneNumber?.isEmpty ?? true
-                              ? "Not Added"
-                              : user!.phoneNumber!,
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black54,
-                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                padding: EdgeInsets.only(left: 20, top: 20),
-                height: MediaQuery.of(context).size.height / 7,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[50],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.indigo[600],
-                            child: Icon(
-                              FlutterIcons.pencil_ent,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Bio',
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      child: getBio(),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                padding: EdgeInsets.only(left: 20, top: 20),
-                height: MediaQuery.of(context).size.height / 5,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[50],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.green[900],
-                            child: Icon(
-                              FlutterIcons.history_faw,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
 
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      child: Scrollbar(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 35, right: 15),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                AppointmentHistoryList(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
             ],
           ),
         ),
@@ -297,10 +159,10 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
     );
   }
 
-  Widget getBio() {
+  Widget getdata() {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection('users')
+          .collection('doctors')
           .doc(user!.uid)
           .snapshots(),
       builder: (context, snapshot) {
@@ -311,23 +173,28 @@ class _doctorProfilepageState extends State<doctorProfilepage> {
         //   var userData = snapshot.data as Map<String, dynamic>;
         var userData = snapshot.data as DocumentSnapshot;
         return Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(top: 10, left: 40),
-          child: Text(
-
-
-            userData['bio'] == null ? "No Bio" : userData['bio'] ?? "No Bio"
-            ,
-            style: GoogleFonts.lato(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black38,
+          padding: EdgeInsets.only(top: 10, right: 7),
+          alignment: Alignment.topRight,
+          child: IconButton(
+            icon: Icon(
+              FlutterIcons.gear_faw,
+              color: Colors.white,
+              size: 20,
             ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => doctorsettingsupdate(description: userData['description'], name:userData['name'], phone: userData['phone'],),
+                ),
+              );
+            },
           ),
         );
       },
     );
   }
+
 }
 
 

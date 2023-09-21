@@ -48,10 +48,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<String> _getUser() async {
-    var user = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(_auth.currentUser!.uid)
-        .get();
+    var user = await FirebaseFirestore.instance.collection('users').doc(_auth.currentUser!.uid).get();
     var userType = user.data()!['userType'].toString();
     debugPrint('this is the get user function $userType');
 
@@ -63,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: loggedIn ? (user == 'doctor' ? '/doctor_home' : (user == 'staff' ? '/staff_home' : '/home')) : '/',
       routes: {
-        '/': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'staff' ? staff_bar() : MainPage())) : Skip(),
+        '/': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'staff' ? staff_bar() : MainPage()))  : Skip(),
         '/home': (context) => loggedIn ? (user == 'doctor' ? doctor_bar() : (user == 'patient' ? FireBaseAuth() : (user == 'staff' ? staff_bar() : staff_bar()))) : Skip(),
         '/profile': (context) => UserProfile(),
         '/MyAppointments': (context) => MyAppointments(),

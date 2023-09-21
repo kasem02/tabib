@@ -103,12 +103,12 @@ class _TopRatedListState extends State<TopRatedList> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(
+                         /* Icon(
                             Typicons.star_full_outline,
                             size: 20,
                             color: Colors.indigo[400],
                           ),
-                          SizedBox(width: 3,),
+                          SizedBox(width: 3,),*/
                         ],
                       ),
                     ),

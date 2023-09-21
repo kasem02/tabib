@@ -159,7 +159,7 @@ class _stuffeditscreenState extends State<stuffeditscreen> {
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
+            overscroll.disallowIndicator();
             return true ;
           },
           child: ListView(

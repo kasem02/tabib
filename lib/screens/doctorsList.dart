@@ -49,7 +49,7 @@ class _DoctorsListState extends State<DoctorsList> {
                   ),
                   filled: true,
                   fillColor: Colors.grey[300],
-                  hintText: 'Search Doctor',
+                  hintText: 'اختار طبيب',
                   hintStyle: GoogleFonts.lato(
                     color: Colors.black26,
                     fontSize: 18,

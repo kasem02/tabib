@@ -31,15 +31,16 @@ class Carouselslider extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                index == 0
-                    ? Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return Disease();
-                      }))
-                    : Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return DiseaseDetail(disease: 'الخدمات والاسعار');
-                      }));
+               if(index==0){
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)
+    {
+      return Disease();
+    }));
+
+               }
+               else{}
+
+
               },
               child: Stack(
                 children: [

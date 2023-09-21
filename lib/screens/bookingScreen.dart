@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_and_doctor_appointment/screens/myAppointments.dart';
+import 'package:health_and_doctor_appointment/screens/serviceandprice.dart';
 import 'package:intl/intl.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -177,7 +178,7 @@ class _BookingScreenState extends State<BookingScreen> {
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
+            overscroll.disallowIndicator();
             return true ;
           },
           child: ListView(
@@ -257,9 +258,10 @@ class _BookingScreenState extends State<BookingScreen> {
                       TextFormField(
                         keyboardType: TextInputType.phone,
                         focusNode: f2,
-                        textAlign: TextAlign.center,
 
                         controller: _phoneController,
+                        textAlign: TextAlign.center,
+
                         style: GoogleFonts.lato(
                             fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
@@ -586,6 +588,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       SizedBox(
                         height: 40,
                       ),
+
                     ],
                   ),
                 ),

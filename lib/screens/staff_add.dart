@@ -141,7 +141,7 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
+            overscroll.disallowIndicator();
             return true ;
           },
           child: ListView(

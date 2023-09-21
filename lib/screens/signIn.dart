@@ -32,7 +32,7 @@ class _SignInState extends State<SignIn> {
         return SafeArea(
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowGlow();
+              overscroll.disallowIndicator();
               return true;
             },
             child: SingleChildScrollView(

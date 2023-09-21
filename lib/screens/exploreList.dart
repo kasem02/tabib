@@ -20,7 +20,7 @@ class _ExploreListState extends State<ExploreList> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          widget.type + 's',
+          widget.type,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 20,

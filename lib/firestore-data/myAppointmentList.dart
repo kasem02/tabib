@@ -19,10 +19,7 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
   }
 
   Future<void> deleteAppointment(String docID) {
-    return FirebaseFirestore.instance
-        .collection('appointments')
-        .doc(docID)
-        .delete();
+    return FirebaseFirestore.instance.collection('appointments').doc(docID).delete();
   }
 
   String _dateFormatter(String _timestamp) {
@@ -40,13 +37,13 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
   showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("No"),
+      child: Text("لا"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Yes"),
+      child: Text("نعم"),
       onPressed: () {
         deleteAppointment(_documentID);
         Navigator.of(context).pop();
@@ -100,145 +97,134 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('appointments')
-            .orderBy('date')
-            .snapshots(),
+      child: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('appointments').orderBy('date').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          print('Stream snapshot: ${snapshot.data}'); // Add this line
+
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
-          return snapshot.data?.size == 0
+          List<DocumentSnapshot> filteredList = snapshot.data!.docs.where((document) {
+            // Specify the condition based on the 'doctormail' field
+            return document['pathionmail'] == user!.email!;
+
+
+          }).toList();
+
+          return filteredList.isEmpty
               ? Center(
-                  child: Text(
-                    'لا توجد مواعيد لعرضها ',
-                    style: GoogleFonts.lato(
-                      color: Colors.grey,
-                      fontSize: 18,
-                    ),
-                  ),
-                )
+            child: Text(
+              'لا توجد مواعيد',
+              style: GoogleFonts.lato(
+                color: Colors.grey,
+                fontSize: 18,
+              ),
+            ),
+          )
               : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: snapshot.data?.size,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot document = snapshot.data!.docs[index];
-                    print(_compareDate(document['date'].toDate().toString()));
-                    if (_checkDiff(document['date'].toDate())) {
-                      deleteAppointment(document.id);
-                    }
-                    return Card(
-                      elevation: 2,
-                      child: InkWell(
-                        onTap: () {},
-                        child: ExpansionTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  document['doctor'],
+            scrollDirection: Axis.vertical,
+            physics: ClampingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: filteredList.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot document = filteredList[index];
+              print(_compareDate(document['date'].toDate().toString()));
+
+              return Card(
+                elevation: 2,
+                child: InkWell(
+                  onTap: () {},
+                  child: ExpansionTile(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            document['doctor'],
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          _compareDate(document['date'].toDate().toString())
+                              ? "اليوم"
+                              : "",
+                          style: GoogleFonts.lato(
+                              color: Colors.green,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 0,
+                        ),
+                      ],
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                        _dateFormatter(
+                            document['date'].toDate().toString()),
+                        style: GoogleFonts.lato(),
+                      ),
+                    ),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 20, right: 10, left: 16),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  document['approved'] == 'onhold'
+                                      ? 'قيد الانتظار'
+                                      : document['approved'] == 'true'
+                                      ? 'تمت الموافقة'
+                                      : 'تم رفض الموعد',
                                   style: GoogleFonts.lato(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                              Text(
-                                _compareDate(
-                                        document['date'].toDate().toString())
-                                    ? "اليوم"
-                                    : "",
-                                style: GoogleFonts.lato(
-                                    color: Colors.green,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 0,
-                              ),
-                            ],
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              _dateFormatter(
-                                  document['date'].toDate().toString()),
-                              style: GoogleFonts.lato(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "التوقيت: " +
+                                      _timeFormatter(
+                                        document['date'].toDate().toString(),
+                                      ),
+                                  style: GoogleFonts.lato(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "اسم المريض: " + document['name'],
+                                  style: GoogleFonts.lato(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20, right: 10, left: 16),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        document['approved'] == 'onhold'
-                                            ? 'قيد الانتظار'
-                                            : document['approved'] == 'true'
-                                            ? 'تمت الموافقة'
-                                            : 'تم رفض الموعد',
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "التوقيت: " +
-                                            _timeFormatter(
-                                              document['date']
-                                                  .toDate()
-                                                  .toString(),
-                                            ),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Text(
-                                        "اسم المريض: " + document['name'],
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                        ),
-                                      ),
 
-                                    ],
-                                  ),
-                                  IconButton(
-                                    tooltip: 'حدف الموعد',
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.black87,
-                                    ),
-                                    onPressed: () {
-                                      print(">>>>>>>>>" + document.id);
-                                      _documentID = document.id;
-                                      showAlertDialog(context);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
+
                           ],
                         ),
                       ),
-                    );
-                  },
-                );
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         },
       ),
     );

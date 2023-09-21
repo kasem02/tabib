@@ -41,7 +41,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
             }
             return NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (OverscrollIndicatorNotification overscroll) {
-                overscroll.disallowGlow();
+                overscroll.disallowIndicator();
                 return true;
               },
               child: ListView.builder(
@@ -118,14 +118,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               SizedBox(
                                 width: 15,
                               ),
-                              Icon(Icons.info),
+                              Icon(Icons.access_time_rounded),
                               SizedBox(
                                 width: 20,
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 child: Text(
-                                  document['description'].isEmpty ? "لم تتم الاضافة بعد" : document['description'],
+                                  document['Period'].isEmpty ? "لم تتم الاضافة بعد" : document['Period'],
 
                                   style: GoogleFonts.lato(
 
@@ -177,7 +177,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               SizedBox(
                                 width: 15,
                               ),
-                              Icon(Icons.access_time_rounded),
+                              Icon(Icons.info),
+
                               SizedBox(
                                 width: 20,
                               ),
@@ -186,7 +187,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 width: 20,
                               ),
                               Text(
-                                document['Period'] ,
+                                document['description'].isEmpty ? "لم تتم الاضافة بعد" : document['description'],
+
                                 style: GoogleFonts.lato(
                                   fontSize: 17,
                                 ),
@@ -197,31 +199,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         ),
                         SizedBox(
                           height: 20,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Icon(Icons.access_time_rounded),
-                              SizedBox(
-                                width: 20,
-                              ),
-
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                document['Period'] ,
-                                style: GoogleFonts.lato(
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ],
-                          ),
-
                         ),
                         SizedBox(
                           height: 20,

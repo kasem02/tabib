@@ -33,11 +33,11 @@ class _DoctormainState extends State<Doctormain> {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Doctor Dashbord'),
+              title: const Text('لوحه تحكم الطبيب'),
               bottom: const TabBar(tabs: [
-                Tab(icon: Icon(Icons.pending), text: 'pendding Appintment'),
-                Tab(icon: Icon(Icons.done), text: 'Approved'),
-                Tab(icon: Icon(Icons.done), text: 'Cancelled'),
+                Tab(icon: Icon(Icons.pending), text: 'مواعيد في الانتظار'),
+                Tab(icon: Icon(Icons.done), text: 'مواعيد المقبوله'),
+                Tab(icon: Icon(Icons.done), text: 'المواعيد المرفوضة'),
 
               ]),
             ),

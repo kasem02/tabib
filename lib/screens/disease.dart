@@ -16,7 +16,7 @@ class _DiseaseState extends State<Disease> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Disease',
+          'الخدمات والاسعار',
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 20,
@@ -47,8 +47,10 @@ class _DiseaseState extends State<Disease> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DiseaseDetail(disease: document['Name'],
-                        ),
+                        builder: (context) => DiseaseDetail(disease: document['Name'], Price: document['Price'], Description: document['Description'], Availability: document['Availability'],
+                        //  builder: (context) => serviceandprice,
+
+                      ),
                       ),
                     );
                   },

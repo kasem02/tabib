@@ -9,7 +9,7 @@
 
     <application
         android:name="${applicationName}"
-        android:label="Medic.ly"
+        android:label="Al Mokhtar Clinic"
         android:exported="true"
         android:icon="@mipmap/ic_launcher">
         <activity

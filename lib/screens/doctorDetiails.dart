@@ -1,9 +1,12 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_and_doctor_appointment/screens/updateDoctorDetiles.dart';
 import 'package:health_and_doctor_appointment/updateUserDetails.dart';
+
+import 'Doctorsettingsupdate.dart';
 
 class doctorDetiails extends StatefulWidget {
   const doctorDetiails({Key? key}) : super(key: key);
@@ -65,17 +68,16 @@ class _doctorDetiailsState extends State<doctorDetiails> {
                 child: InkWell(
                   splashColor: Colors.grey.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10),
+
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => updatedoctorDetils(
-                          label: labelName[index],
-                          field: value[index],
-                        ),
+                        builder: (context) => doctorsettingsupdate(description:'' , name: '', phone: '',)
                       ),
                     );
                   },
+
                   child: Ink(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),

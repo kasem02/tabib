@@ -40,7 +40,7 @@ class _staffprofileState extends State<staffprofile> {
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
+            overscroll.disallowIndicator();
             return true ;
           },
           child: ListView(

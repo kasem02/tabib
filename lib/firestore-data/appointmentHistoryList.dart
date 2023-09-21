@@ -50,11 +50,7 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
     return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('appointments')
-            .doc(user.email.toString())
-            .collection('all')
-            .orderBy('date', descending: true)
-            .snapshots(),
+            .collection('appointments').orderBy('date', descending: true).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(

@@ -1,21 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/serviceandprice.dart';
 
-class DiseaseDetail extends StatefulWidget {
-  final String disease;
-  final String Price;
-  final String Description;
-  final String Availability;
-
-  const DiseaseDetail({required this.disease, required this.Price, required this.Description, required this.Availability,});
-  @override
-  _DiseaseDetailState createState() => _DiseaseDetailState();
-}
-
-class _DiseaseDetailState extends State<DiseaseDetail> {
+class serviceandprice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -60,7 +46,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                     height: 20,
                   ),
                   Text(
-                    widget.disease,
+                    'My\nProfile',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -94,10 +80,10 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                 child: Column(
                                   children: [
                                     SizedBox(
-                                      height: 60,
+                                      height: 80,
                                     ),
                                     Text(
-                                      widget.disease,
+                                      'Jhone Doe',
                                       style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
                                         fontFamily: 'Nunito',
@@ -114,7 +100,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                         Column(
                                           children: [
                                             Text(
-                                              'السعر',
+                                              'Orders',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
@@ -122,7 +108,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                               ),
                                             ),
                                             Text(
-                                              widget.Price,
+                                              '10',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
@@ -150,7 +136,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                         Column(
                                           children: [
                                             Text(
-                                              'التوفر',
+                                              'Pending',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',
@@ -158,7 +144,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                               ),
                                             ),
                                             Text(
-                                              widget.Availability,
+                                              '1',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(
                                                     39, 105, 171, 1),
@@ -178,7 +164,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                               top: 110,
                               right: 20,
                               child: Icon(
-                                AntDesign.plus,
+                                AntDesign.setting,
                                 color: Colors.grey[700],
                                 size: 30,
                               ),
@@ -189,11 +175,10 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                               right: 0,
                               child: Center(
                                 child: Container(
-                                  child: CircleAvatar(
-                                    radius: 60, // Image radius
-
-                                    backgroundImage:  NetworkImage('https://img.freepik.com/free-vector/flat-medical-symbol_23-2149496596.jpg'),
-
+                                  child: Image.asset(
+                                    'assets/serivceandprice.png',
+                                    width: innerWidth * 0.45,
+                                    fit: BoxFit.fitWidth,
                                   ),
                                 ),
                               ),
@@ -221,7 +206,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                             height: 20,
                           ),
                           Text(
-                            'تفاصيل الخدمه',
+                            'التفاصيل',
                             style: TextStyle(
                               color: Color.fromRGBO(39, 105, 171, 1),
                               fontSize: 27,
@@ -237,20 +222,20 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                           Container(
                             height: height * 0.15,
                             decoration: BoxDecoration(
+                              color: Colors.grey,
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            child: Center(
-                              child: Text(
-                               widget.Description,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.grey[700],
-                                ),
-                              ),
-                            ),
+                            child: Text("infromiaon"),
                           ),
                           SizedBox(
                             height: 10,
+                          ),
+                          Container(
+                            height: height * 0.15,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
                         ],
                       ),

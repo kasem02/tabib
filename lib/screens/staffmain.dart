@@ -55,8 +55,7 @@ class _staffmainState extends State<staffmain> {
               }
               return snapshot.data?.size == 0
                   ? Center(
-                child: Text(
-                  'لا توجد خدمات تم اضافتها ',
+                child: Text('لا توجد خدمات تم اضافتها ',
                   style: GoogleFonts.lato(
                     color: Colors.grey,
                     fontSize: 18,

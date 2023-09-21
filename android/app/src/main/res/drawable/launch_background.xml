@@ -7,6 +7,9 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/launch_image" />
+            android:src="@drawable/launch_image"
+            android:scaleType="center"
+
+            />
     </item>
 </layer-list>

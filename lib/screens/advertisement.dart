@@ -40,7 +40,7 @@ class _advetisemantState extends State<advetisemant> {
             }
             return NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (OverscrollIndicatorNotification overscroll) {
-                overscroll.disallowGlow();
+                overscroll.disallowIndicator();
                 return true;
               },
               child: ListView.builder(

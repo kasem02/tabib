@@ -44,7 +44,7 @@ class _RegisterState extends State<Register> {
         child: Center(
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowGlow();
+              overscroll.disallowIndicator();
               return true;
             },
             child: SingleChildScrollView(
