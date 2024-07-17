@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/bookingScreen.dart';
+import 'package:AlMokhtar_Clinic/screens/bookingScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DoctorProfile extends StatefulWidget {
@@ -171,31 +171,25 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         ),
 
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 15,
+                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            child: SingleChildScrollView(
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 15,),
+                                  Icon(Icons.info),
+                                  SizedBox(width: 20,),
+                                  Expanded(
+                                    child: Text(
+                                      document['description'].isEmpty
+                                          ? "لم تتم الاضافة بعد"
+                                          : document['description'],
+                                      style: GoogleFonts.lato(fontSize: 17,),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Icon(Icons.info),
-
-                              SizedBox(
-                                width: 20,
-                              ),
-
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                document['description'].isEmpty ? "لم تتم الاضافة بعد" : document['description'],
-
-                                style: GoogleFonts.lato(
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ],
-                          ),
-
+                            )
                         ),
                         SizedBox(
                           height: 20,

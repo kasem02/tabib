@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:health_and_doctor_appointment/firestore-data/appointmentHistoryList.dart';
-import 'package:health_and_doctor_appointment/screens/userSettings.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/appointmentHistoryList.dart';
+import 'package:AlMokhtar_Clinic/screens/userSettings.dart';
 
 import 'Doctorsettings.dart';
 
@@ -199,7 +199,7 @@ class _staffprofileState extends State<staffprofile> {
                           },
                           style: TextButton.styleFrom(primary: Colors.grey),
                           child: Text(
-                            'Sign out',
+                            'تسجيل الخروج',
                             style: GoogleFonts.lato(
                               color: Colors.black,
                               fontSize: 16,
@@ -213,47 +213,6 @@ class _staffprofileState extends State<staffprofile> {
 
                   ],
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                padding: EdgeInsets.only(left: 20, top: 20),
-                height: MediaQuery.of(context).size.height / 5,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[50],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.green[900],
-                            child: Icon(
-                              FlutterIcons.history_faw,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
               ),
             ],
           ),

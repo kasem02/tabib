@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/signIn.dart';
+import 'package:AlMokhtar_Clinic/screens/signIn.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -491,11 +491,11 @@ class _RegisterState extends State<Register> {
       }else {
         FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'name': _displayName.text,
-          'birthDate': null,
+          'birthDate': '',
           'email': user.email,
-          'phone': null,
-          'bio': null,
-          'city': null,
+          'phone': '',
+          'bio': '',
+          'city': '',
           'userType' : dropdownValue,
 
         }, SetOptions(merge: true));

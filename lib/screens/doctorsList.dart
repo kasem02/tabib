@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
 
 class DoctorsList extends StatefulWidget {
   @override

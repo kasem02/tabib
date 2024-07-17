@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/doctorProfile.dart';
+import 'package:AlMokhtar_Clinic/screens/doctorProfile.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 
 class TopRatedList extends StatefulWidget {
@@ -27,8 +29,7 @@ class _TopRatedListState extends State<TopRatedList> {
             scrollDirection: Axis.vertical,
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
-          //  itemCount: 5,
-            itemCount: snapshot.hasData ? snapshot.data!.docs.length : 0,
+              itemCount: snapshot.hasData ? min(5, snapshot.data!.docs.length) : 0,
 
             itemBuilder: (context, index) {
     if (snapshot.hasData && index < snapshot.data!.docs.length) {

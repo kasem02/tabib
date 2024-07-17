@@ -6,14 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:health_and_doctor_appointment/screens/staffmain.dart';
-import 'package:typicons_flutter/typicons_flutter.dart';
-import 'package:quick_actions/quick_actions.dart';
+import 'package:AlMokhtar_Clinic/screens/staffmain.dart';
 
-import 'Doctormain.dart';
-import 'Doctorsettings.dart';
-import 'docotrProfPage.dart';
-import 'mydoctorappoinment.dart';
 import 'staffprofile.dart';
 
 class staff_bar extends StatefulWidget {

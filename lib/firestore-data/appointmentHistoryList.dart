@@ -12,7 +12,6 @@ class AppointmentHistoryList extends StatefulWidget {
 class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   late User user;
-  late String _documentID;
 
   Future<void> _getUser() async {
     user = _auth.currentUser!;

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/diseasedetail.dart';
+import 'package:AlMokhtar_Clinic/screens/diseasedetail.dart';
 
 class Disease extends StatefulWidget {
   @override
@@ -41,7 +41,6 @@ class _DiseaseState extends State<Disease> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 var document = snapshot.data!.docs[index];
-                print('this is the main doc' + document['Name'].toString());
                 return ListTile(
                   onTap: () {
                     Navigator.push(

@@ -7,8 +7,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/firestore-data/userDetails.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/userDetails.dart';
 
 import 'doctorDetiails.dart';
 class doctorsettingsupdate extends StatefulWidget {
@@ -48,11 +50,11 @@ class _doctorsettingsupdateState extends State<doctorsettingsupdate> {
     'طبيب باطنة',
     'طبيب اطفال',
   ];
-  List<String> periodOptions = ['فترة صباحية', 'فترة مسائية'];
+  List<String> periodOptions = ['فتره صباحية', 'فترة مسائية'];
 
   // Variables to hold selected values
   late String? selectedType = "طبيب عام" ;
-  late String? selectedPeriod = "فترة صباحية";
+  late String? selectedPeriod = "فتره صباحية";
 
   doctorDetiails detail = new doctorDetiails();
   TextEditingController nameController = TextEditingController();
@@ -148,7 +150,8 @@ class _doctorsettingsupdateState extends State<doctorsettingsupdate> {
                 // Text input for 'phone'
                 TextFormField(
                   textAlign: TextAlign.center,
-
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Allow only numeric input
                   style: GoogleFonts.lato(
                       fontSize: 18, fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
@@ -256,9 +259,21 @@ class _doctorsettingsupdateState extends State<doctorsettingsupdate> {
                         'type': selectedType,
                         'Period': selectedPeriod,
                       }).then((value) {
+                        Fluttertoast.showToast(
+                          msg: "تم تعديل المعلومات بنجاح",
+                          toastLength: Toast.LENGTH_SHORT, // Duration of the toast
+                          gravity: ToastGravity.BOTTOM, // Toast position
+                          timeInSecForIosWeb: 1, // Time in seconds for iOS and web
+                          backgroundColor: Colors.black, // Background color of the toast
+                          textColor: Colors.white, // Text color of the toast
+                          fontSize: 16.0, // Font size of the toast message
+                        );
+
+
+
                       }).catchError((error) {
 
-        print(error.toString());
+                     print(error.toString());
 
                       });
                     },

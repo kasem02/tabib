@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/myAppointments.dart';
-import 'package:health_and_doctor_appointment/screens/serviceandprice.dart';
+import 'package:AlMokhtar_Clinic/screens/myAppointments.dart';
 import 'package:intl/intl.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -58,7 +58,7 @@ class _BookingScreenState extends State<BookingScreen> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2021),
+      firstDate: DateTime.now() ,
       lastDate: DateTime(2025),
     ).then(
       (date) {
@@ -256,9 +256,9 @@ class _BookingScreenState extends State<BookingScreen> {
                         height: 20,
                       ),
                       TextFormField(
-                        keyboardType: TextInputType.phone,
                         focusNode: f2,
-
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                         controller: _phoneController,
                         textAlign: TextAlign.center,
 
@@ -418,7 +418,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             TextFormField(
                               focusNode: f6,
                               textAlign: TextAlign.center,
-
+                              readOnly: true,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                   left: 20,
@@ -492,7 +492,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             TextFormField(
                               focusNode: f7,
                               textAlign: TextAlign.center,
-
+                              readOnly: true,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                   left: 20,
@@ -601,16 +601,6 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<void> _createAppointment() async {
-   /*
-   *  print(dateUTC + ' ' + date_Time + ':00');
-    FirebaseFirestore.instance.collection('appointments').doc(user.email).collection('pending').doc().set({'name': _nameController.text, 'phone': _phoneController.text, 'description': _descriptionController.text, 'doctor': _doctorController.text, 'padding': "false",
-
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
-    }, SetOptions(merge: true));
-   *
-   *
-   *
-   * */
 
     FirebaseFirestore.instance
         .collection('appointments')

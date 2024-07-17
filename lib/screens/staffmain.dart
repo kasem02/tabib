@@ -2,17 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:typicons_flutter/typicons_flutter.dart';
-
-import 'advertisement.dart';
-import 'doctorCancledappointment.dart';
-import 'doctorapprovedApoinemt.dart';
-import 'mydoctorappoinment.dart';
 import 'staff_add.dart';
 import 'stuff_edit.dart';
 FirebaseAuth _auth = FirebaseAuth.instance;

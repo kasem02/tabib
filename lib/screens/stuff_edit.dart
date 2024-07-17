@@ -3,8 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/myAppointments.dart';
-import 'package:intl/intl.dart';
+
 
 class stuffeditscreen extends StatefulWidget {
   final String title;
@@ -59,29 +58,6 @@ class _stuffeditscreenState extends State<stuffeditscreen> {
 
   }
 
-  Future<void> _createAppointment() async {
-    /*
-   *  print(dateUTC + ' ' + date_Time + ':00');
-    FirebaseFirestore.instance.collection('appointments').doc(user.email).collection('pending').doc().set({'name': _nameController.text, 'phone': _phoneController.text, 'description': _descriptionController.text, 'doctor': _doctorController.text, 'padding': "false",
-
-      'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
-    }, SetOptions(merge: true));
-   *
-   *
-   *
-   * */
-
-    FirebaseFirestore.instance
-        .collection('serives')
-        .doc().set({
-      'Name': _nameController.text,
-      'Price': priceController.text,
-      'Description': _descriptionController.text,
-      'Availability': AvailabilityController.text,
-
-
-    }, SetOptions(merge: true));
-  }
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = TextButton(

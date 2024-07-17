@@ -69,14 +69,6 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
     );
   }
 
-  _checkDiff(DateTime _date) {
-    var diff = DateTime.now().difference(_date).inHours;
-    if (diff > 2) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   _compareDate(String _date) {
     if (_dateFormatter(DateTime.now().toString())
@@ -182,6 +174,7 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
@@ -214,6 +207,19 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
                                 ),
                               ],
                             ),
+                            IconButton(
+                              tooltip: 'حذف الموعد',
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.black87,
+                              ),
+                              onPressed: () {
+                                print(">>>>>>>>>" + document.id);
+                                _documentID = document.id;
+                                showAlertDialog(context);
+                              },
+                            ),
+
 
 
                           ],

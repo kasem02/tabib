@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
-import 'package:health_and_doctor_appointment/screens/homePage.dart';
-import 'package:health_and_doctor_appointment/screens/myAppointments.dart';
-import 'package:health_and_doctor_appointment/screens/userProfile.dart';
-import 'package:health_and_doctor_appointment/screens/doctorsList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
+import 'package:AlMokhtar_Clinic/screens/homePage.dart';
+import 'package:AlMokhtar_Clinic/screens/myAppointments.dart';
+import 'package:AlMokhtar_Clinic/screens/userProfile.dart';
+import 'package:AlMokhtar_Clinic/screens/doctorsList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

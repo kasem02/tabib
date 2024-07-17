@@ -5,8 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:health_and_doctor_appointment/firestore-data/appointmentHistoryList.dart';
-import 'package:health_and_doctor_appointment/screens/userSettings.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/appointmentHistoryList.dart';
+import 'package:AlMokhtar_Clinic/screens/appinfo.dart';
+import 'package:AlMokhtar_Clinic/screens/userSettings.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -62,23 +63,37 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                         height: MediaQuery.of(context).size.height / 5,
                         child: Container(
-                          padding: EdgeInsets.only(top: 10, right: 7),
-                          alignment: Alignment.topRight,
-                          child: IconButton(
-                            icon: Icon(
-                              FlutterIcons.gear_faw,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UserSettings(),
-                                ),
-                              );
-                            },
-                          ),
+                            padding: EdgeInsets.only(top: 10, right: 7),
+                            alignment: Alignment.topRight,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      icon: Icon(FlutterIcons.gear_faw),
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) => UserSettings()
+                                            )
+                                        );
+                                      }
+                                  ),
+                                  SizedBox(width: 10),
+                                  IconButton(
+                                      icon: Icon(Icons.info),
+                                      onPressed: () {
+
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) => appinfo()
+                                            )
+                                        );
+
+
+                                      }
+                                  )
+                                ]
+                            )
                         ),
                       ),
                       Container(
@@ -175,7 +190,7 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                         Text(
                           user!.phoneNumber?.isEmpty ?? true
-                              ? "Not Added"
+                              ? "لم تم الاضافه"
                               : user!.phoneNumber!,
                           style: GoogleFonts.lato(
                             fontSize: 16,
@@ -188,126 +203,7 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                padding: EdgeInsets.only(left: 20, top: 20),
-                height: MediaQuery.of(context).size.height / 7,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[50],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.indigo[600],
-                            child: Icon(
-                              FlutterIcons.pencil_ent,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Bio',
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      child: getBio(),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                padding: EdgeInsets.only(left: 20, top: 20),
-                height: MediaQuery.of(context).size.height / 5,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[50],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            height: 27,
-                            width: 27,
-                            color: Colors.green[900],
-                            child: Icon(
-                              FlutterIcons.history_faw,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "تاريخ المواعيد",
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            alignment: Alignment.centerRight,
-                            child: SizedBox(
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text('View all'),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      child: Scrollbar(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 35, right: 15),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                AppointmentHistoryList(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
+
             ],
           ),
         ),
@@ -315,35 +211,4 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  Widget getBio() {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('users')
-          .doc(user!.uid)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData)
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-     //   var userData = snapshot.data as Map<String, dynamic>;
-        var userData = snapshot.data as DocumentSnapshot;
-        return Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(top: 10, left: 40),
-          child: Text(
-
-
-           userData['bio'] == null ? "No Bio" : userData['bio'] ?? "No Bio"
-            ,
-            style: GoogleFonts.lato(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black38,
-            ),
-          ),
-        );
-      },
-    );
-  }
 }

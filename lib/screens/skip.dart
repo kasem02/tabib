@@ -64,7 +64,7 @@ class _SkipState extends State<Skip> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'لدينا افضل الخدماتنا والاسعار',
+              'لدينا افضل الخدمات والاسعار',
               style:
                   GoogleFonts.lato(fontSize: 30, fontWeight: FontWeight.w900),
             ),

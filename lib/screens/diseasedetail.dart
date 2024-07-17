@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/serviceandprice.dart';
+import 'package:AlMokhtar_Clinic/screens/serviceandprice.dart';
 
 class DiseaseDetail extends StatefulWidget {
   final String disease;
@@ -246,6 +246,8 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                   fontSize: 18,
                                   color: Colors.grey[700],
                                 ),
+                                maxLines: null, // This allows unlimited lines
+                                overflow: TextOverflow.clip, // This cli
                               ),
                             ),
                           ),

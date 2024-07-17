@@ -7,10 +7,17 @@
          FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="30" />
+
     <application
         android:name="${applicationName}"
         android:label="Al Mokhtar Clinic"
         android:exported="true"
+        android:minSdkVersion="16"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

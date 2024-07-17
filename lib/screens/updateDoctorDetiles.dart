@@ -4,13 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-
-
-
-
-
-
-
 class updatedoctorDetils extends StatefulWidget {
   final String label;
   final String field;

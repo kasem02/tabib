@@ -110,7 +110,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
                   ),
                 ),
                 child: Text(
-                  'Update',
+                  'تحديث',
                   style: GoogleFonts.lato(
                       color: Colors.white,
                       fontSize: 18,

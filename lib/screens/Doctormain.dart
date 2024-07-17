@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
-import 'package:health_and_doctor_appointment/firestore-data/notificationList.dart';
-import 'package:health_and_doctor_appointment/model/cardModel.dart';
-import 'package:health_and_doctor_appointment/carouselSlider.dart';
-import 'package:health_and_doctor_appointment/screens/exploreList.dart';
-import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
-import 'package:health_and_doctor_appointment/firestore-data/topRatedList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/notificationList.dart';
+import 'package:AlMokhtar_Clinic/model/cardModel.dart';
+import 'package:AlMokhtar_Clinic/carouselSlider.dart';
+import 'package:AlMokhtar_Clinic/screens/exploreList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/topRatedList.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +33,15 @@ class _DoctormainState extends State<Doctormain> {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
               title: const Text('لوحه تحكم الطبيب'),
               bottom: const TabBar(tabs: [
                 Tab(icon: Icon(Icons.pending), text: 'مواعيد في الانتظار'),
                 Tab(icon: Icon(Icons.done), text: 'مواعيد المقبوله'),
                 Tab(icon: Icon(Icons.done), text: 'المواعيد المرفوضة'),
-
               ]),
             ),
             body: const TabBarView(children: [mydcotorappiment(),doctoraprrvedappmoent(),doctorcansledappmoent()]),

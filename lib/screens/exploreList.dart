@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:health_and_doctor_appointment/screens/doctorProfile.dart';
+import 'package:AlMokhtar_Clinic/screens/doctorProfile.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 
 class ExploreList extends StatefulWidget {
@@ -34,8 +34,7 @@ class _ExploreListState extends State<ExploreList> {
       body: Padding(
         padding: EdgeInsets.only(top: 10),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('doctors').orderBy('type').startAt([widget.type]).endAt([widget.type + '\uf8ff']).snapshots(),
+          stream: FirebaseFirestore.instance.collection('doctors').orderBy('type').startAt([widget.type]).endAt([widget.type]).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {

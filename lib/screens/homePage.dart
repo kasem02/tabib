@@ -1,17 +1,19 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
-import 'package:health_and_doctor_appointment/firestore-data/notificationList.dart';
-import 'package:health_and_doctor_appointment/model/cardModel.dart';
-import 'package:health_and_doctor_appointment/carouselSlider.dart';
-import 'package:health_and_doctor_appointment/screens/exploreList.dart';
-import 'package:health_and_doctor_appointment/firestore-data/searchList.dart';
-import 'package:health_and_doctor_appointment/firestore-data/topRatedList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/notificationList.dart';
+import 'package:AlMokhtar_Clinic/model/cardModel.dart';
+import 'package:AlMokhtar_Clinic/carouselSlider.dart';
+import 'package:AlMokhtar_Clinic/screens/exploreList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
+import 'package:AlMokhtar_Clinic/firestore-data/topRatedList.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+
+import 'explorelistbyperiod.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -282,6 +284,117 @@ class _HomePageState extends State<HomePage> {
                                     alignment: Alignment.bottomCenter,
                                     child: Text(
                                       cards[index].doctor,
+                                      style: GoogleFonts.lato(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      child: Center(
+                        child: Text(
+                          "الفترات",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.lato(
+                              color: Colors.blue[800],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      height: 170,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top: 14),
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        itemCount: proid.length,
+                        itemBuilder: (context, index) {
+                          //print("images path: ${cards[index].cardImage.toString()}");
+                          return Container(
+                            margin: EdgeInsets.only(right: 14),
+                            height: 150,
+                            width: 140,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(proid[index].cardBackground),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 4.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(3, 3),
+                                  ),
+                                ]
+                              // image: DecorationImage(
+                              //   image: AssetImage(cards[index].cardImage),
+                              //   fit: BoxFit.fill,
+                              // ),
+                            ),
+                            // ignore: deprecated_member_use
+
+
+
+
+
+
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ExploreListbyperoid(
+                                        peroid: proid[index].doctor,
+                                      )),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+
+
+
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Container(
+                                    child: CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 29,
+                                        child: Icon(
+                                          proid[index].cardIcon,
+                                          size: 26,
+                                          color:
+                                          Color(proid[index].cardBackground),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      proid[index].doctor,
                                       style: GoogleFonts.lato(
                                           color: Colors.white,
                                           fontSize: 16,
