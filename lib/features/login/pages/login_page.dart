@@ -1,53 +1,53 @@
+import 'package:AlMokhtar_Clinic/features/login/manager/Auth_bloc.dart';
+import 'package:AlMokhtar_Clinic/features/login/manager/auth_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:AlMokhtar_Clinic/screens/register.dart';
 
-import '../mainPage.dart';
-
-class SignIn extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _SignInState extends State<SignIn> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _passwordController = TextEditingController();
 
-  FocusNode f1 = new FocusNode();
-  FocusNode f2 = new FocusNode();
-  FocusNode f3 = new FocusNode();
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      key: _scaffoldKey,
-      body: Builder(builder: (BuildContext context) {
-        return SafeArea(
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowIndicator();
-              return true;
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-                    child: withEmailPassword(),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          key: _scaffoldKey,
+          body: Builder(builder: (BuildContext context) {
+            return SafeArea(
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (OverscrollIndicatorNotification overscroll) {
+                  overscroll.disallowIndicator();
+                  return true;
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                        child: withEmailPassword(),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          }),
         );
-      }),
+      },
     );
   }
 
@@ -62,7 +62,8 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               width: double.infinity,
               child: Container(
-                child: Image.asset('assets/vector-doc2.jpg',
+                child: Image.asset(
+                  'assets/vector-doc2.jpg',
                   scale: 3.5,
                 ),
               ),
@@ -81,7 +82,6 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             TextFormField(
-              focusNode: f1,
               style: GoogleFonts.lato(
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
@@ -103,10 +103,8 @@ class _SignInState extends State<SignIn> {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              onFieldSubmitted: (value) {
-                f1.unfocus();
-                FocusScope.of(context).requestFocus(f2);
-              },
+              onChanged: (value) =>
+                  context.read<AuthBloc>().onChangeUserName(value: value),
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -122,7 +120,6 @@ class _SignInState extends State<SignIn> {
               height: 25.0,
             ),
             TextFormField(
-              focusNode: f2,
               style: GoogleFonts.lato(
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
@@ -144,10 +141,8 @@ class _SignInState extends State<SignIn> {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              onFieldSubmitted: (value) {
-                f2.unfocus();
-                FocusScope.of(context).requestFocus(f3);
-              },
+              onChanged: (value) =>
+                  context.read<AuthBloc>().onChangePassword(value: value),
               textInputAction: TextInputAction.done,
               validator: (value) {
                 if (value!.isEmpty) return 'نرجو منك ادخال كلمه السر';
@@ -161,7 +156,6 @@ class _SignInState extends State<SignIn> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  focusNode: f3,
                   child: Text(
                     "تسجيل الدخول",
                     style: GoogleFonts.lato(
@@ -172,8 +166,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      showLoaderDialog(context);
-                      _signInWithEmailAndPassword();
+                      context.read<AuthBloc>().onLogin();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -251,20 +244,20 @@ class _SignInState extends State<SignIn> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    TextButton(
-                      style: ButtonStyle(
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent)),
-                      onPressed: () => _pushPage(context, Register()),
-                      child: Text(
-                        'سجل في التطبيق ',
-                        style: GoogleFonts.lato(
-                          fontSize: 15,
-                          color: Colors.indigo[700],
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    // TextButton(
+                    //   style: ButtonStyle(
+                    //       overlayColor:
+                    //       MaterialStateProperty.all(Colors.transparent)),
+                    //   onPressed: () => _pushPage(context, Register()),
+                    //   child: Text(
+                    //     'سجل في التطبيق ',
+                    //     style: GoogleFonts.lato(
+                    //       fontSize: 15,
+                    //       color: Colors.indigo[700],
+                    //       fontWeight: FontWeight.w600,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -282,25 +275,6 @@ class _SignInState extends State<SignIn> {
     super.dispose();
   }
 
-  showLoaderDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: new Row(
-        children: [
-          CircularProgressIndicator(),
-          Container(
-              margin: EdgeInsets.only(left: 15), child: Text("نرجو الانتظار قليلا")),
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
   bool emailValidate(String email) {
     if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -309,44 +283,5 @@ class _SignInState extends State<SignIn> {
     } else {
       return false;
     }
-  }
-
-  void _signInWithEmailAndPassword() async {
-    try {
-      final User? user = (await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      )).user;
-      if (!user!.emailVerified) {
-        await user.sendEmailVerification();
-      }
-      final userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-      if (userDoc.exists && userDoc.data()!['userType'] == 'doctor') {
-        Navigator.of(context).pushNamedAndRemoveUntil('/doctor_home', (Route<dynamic> route) => false);
-      }
-      else {
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-      }
-    }
-    catch (e) {
-      final snackBar = SnackBar(
-        content: Row(
-          children: [
-            Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            ),
-            Text(" هنالك مشكله في تسجيل دخولك "),
-          ],
-        ),
-      );
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
-  void _pushPage(BuildContext context, Widget page) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => page),
-    );
   }
 }

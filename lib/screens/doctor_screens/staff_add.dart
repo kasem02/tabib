@@ -326,8 +326,6 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
                           style: ElevatedButton.styleFrom(
                             elevation: 2,
 
-                            primary: Colors.indigo,
-                            onPrimary: Colors.black,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32.0),
                             ),

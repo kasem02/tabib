@@ -1,36 +1,27 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
-import 'package:AlMokhtar_Clinic/screens/homePage.dart';
-import 'package:AlMokhtar_Clinic/screens/myAppointments.dart';
-import 'package:AlMokhtar_Clinic/screens/userProfile.dart';
-import 'package:AlMokhtar_Clinic/screens/doctorsList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:typicons_flutter/typicons_flutter.dart';
-import 'package:quick_actions/quick_actions.dart';
 
-import 'Doctormain.dart';
-import 'Doctorsettings.dart';
+import '../features/appointment/pages/Doctormain.dart';
 import 'docotrProfPage.dart';
-import 'mydoctorappoinment.dart';
 
-class doctor_bar extends StatefulWidget {
-  const doctor_bar({Key? key}) : super(key: key);
+class DoctorBar extends StatefulWidget {
+  const DoctorBar({Key? key}) : super(key: key);
 
   @override
-  State<doctor_bar> createState() => _doctor_barState();
+  State<DoctorBar> createState() => _DoctorBarState();
 }
 
-class _doctor_barState extends State<doctor_bar> {
+class _DoctorBarState extends State<DoctorBar> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
   List<Widget> _pages = [
-    Doctormain(),
+    DoctorMain(),
     doctorProfilepage(),
   ];
 
@@ -119,7 +110,6 @@ class _doctor_barState extends State<doctor_bar> {
                     icon: FlutterIcons.doctor_mco,
                     text: 'حسابي',
                   ),
-
 
                 ],
                 selectedIndex: _selectedIndex,

@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 
-import 'explorelistbyperiod.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
     return Scaffold(
-      backgroundColor: Colors.transparent, // Set background color to transparent
+      backgroundColor: Theme.of(context).canvasColor, // Set background color to transparent
       key: _scaffoldKey,
       appBar: AppBar(
         // ... Your app bar code ...
@@ -355,13 +354,13 @@ class _HomePageState extends State<HomePage> {
 
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ExploreListbyperoid(
-                                        peroid: proid[index].doctor,
-                                      )),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => ExploreListbyperoid(
+                                //         peroid: proid[index].doctor,
+                                //       )),
+                                // );
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(

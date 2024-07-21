@@ -1,14 +1,9 @@
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:AlMokhtar_Clinic/firestore-data/appointmentHistoryList.dart';
-import 'package:AlMokhtar_Clinic/screens/userSettings.dart';
 
-import 'Doctorsettings.dart';
 
 class staffprofile extends StatefulWidget {
   const staffprofile({Key? key}) : super(key: key);
@@ -197,7 +192,7 @@ class _staffprofileState extends State<staffprofile> {
                                 '/login', (Route<dynamic> route) => false);
                             _signOut();
                           },
-                          style: TextButton.styleFrom(primary: Colors.grey),
+                          style: TextButton.styleFrom(),
                           child: Text(
                             'تسجيل الخروج',
                             style: GoogleFonts.lato(

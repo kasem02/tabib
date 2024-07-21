@@ -277,7 +277,7 @@ class _doctorsettingsupdateState extends State<doctorsettingsupdate> {
 
                       });
                     },
-                    style: TextButton.styleFrom(primary: Colors.grey),
+                    style: TextButton.styleFrom(),
                     child: Text(
                       ' تعديل المعلومات',
                       style: GoogleFonts.lato(
@@ -305,7 +305,7 @@ class _doctorsettingsupdateState extends State<doctorsettingsupdate> {
                           '/login', (Route<dynamic> route) => false);
                       _signOut();
                     },
-                    style: TextButton.styleFrom(primary: Colors.grey),
+                    style: TextButton.styleFrom(),
                     child: Text(
                       'تسجيل الخروج',
                       style: GoogleFonts.lato(

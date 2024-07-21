@@ -319,9 +319,6 @@ class _stuffeditscreenState extends State<stuffeditscreen> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 2,
-
-                            primary: Colors.indigo,
-                            onPrimary: Colors.black,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32.0),
                             ),

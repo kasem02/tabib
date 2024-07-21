@@ -208,8 +208,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               elevation: 2,
-                              primary: Colors.indigo.withOpacity(0.9),
-                              onPrimary: Colors.black,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32.0),
                               ),

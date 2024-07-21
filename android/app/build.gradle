@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     buildToolsVersion '33.0.0'
 
     sourceSets {
@@ -50,7 +50,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.ahmed.appointment"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         compileSdkVersion = 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

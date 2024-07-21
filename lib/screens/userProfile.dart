@@ -1,12 +1,7 @@
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:AlMokhtar_Clinic/firestore-data/appointmentHistoryList.dart';
-import 'package:AlMokhtar_Clinic/screens/appinfo.dart';
 import 'package:AlMokhtar_Clinic/screens/userSettings.dart';
 
 class UserProfile extends StatefulWidget {
@@ -82,12 +77,12 @@ class _UserProfileState extends State<UserProfile> {
                                   IconButton(
                                       icon: Icon(Icons.info),
                                       onPressed: () {
-
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) => appinfo()
-                                            )
-                                        );
+                                        //
+                                        // Navigator.push(context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) => appinfo()
+                                        //     )
+                                        // );
 
 
                                       }

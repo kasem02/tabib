@@ -1,23 +1,23 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:AlMokhtar_Clinic/screens/doctor_screens/staffprofile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:AlMokhtar_Clinic/screens/staffmain.dart';
+import 'package:AlMokhtar_Clinic/screens/doctor_screens/staffmain.dart';
 
-import 'staffprofile.dart';
 
-class staff_bar extends StatefulWidget {
-  const staff_bar({Key? key}) : super(key: key);
+class StaffBar extends StatefulWidget {
+  const StaffBar({Key? key}) : super(key: key);
 
   @override
-  State<staff_bar> createState() => _staff_barState();
+  State<StaffBar> createState() => _StaffBarState();
 }
 
-class _staff_barState extends State<staff_bar> {
+class _StaffBarState extends State<StaffBar> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;

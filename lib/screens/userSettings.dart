@@ -69,7 +69,7 @@ class _UserSettingsState extends State<UserSettings> {
                     '/login', (Route<dynamic> route) => false);
                 _signOut();
               },
-              style: TextButton.styleFrom(primary: Colors.grey),
+              style: TextButton.styleFrom(),
               child: Text(
                 'تسجيل الخروج',
                 style: GoogleFonts.lato(

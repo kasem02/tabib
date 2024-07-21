@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'staff_add.dart';
-import 'stuff_edit.dart';
+import '../stuff_edit.dart';
 FirebaseAuth _auth = FirebaseAuth.instance;
 late User user;
 late String _documentID;
