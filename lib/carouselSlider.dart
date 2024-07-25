@@ -14,34 +14,28 @@ class Carouselslider extends StatelessWidget {
       child: CarouselSlider.builder(
         itemCount: bannerCards.length,
         itemBuilder: (context, index, realIndex) {
-          return Container(
-            //alignment:  Alignment.centerLeft,
-            //width: MediaQuery.of(context).size.width,
-            height: 140,
-            margin: EdgeInsets.only(left: 0, right: 0, bottom: 20),
-            padding: EdgeInsets.only(left: 0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                stops: [0.3, 0.7],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: bannerCards[index].cardBackground,
+          return GestureDetector(
+            onTap: () {
+              if (index == 0) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                  return Disease();
+                }));
+              } else {}
+            },
+            child: Container(
+              height: 140,
+              margin: EdgeInsets.only(left: 0, right: 0, bottom: 20),
+              padding: EdgeInsets.only(left: 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  stops: [0.3, 0.7],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: bannerCards[index].cardBackground,
+                ),
               ),
-            ),
-            child: GestureDetector(
-              onTap: () {
-               if(index==0){
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)
-    {
-      return Disease();
-    }));
-
-               }
-               else{}
-
-
-              },
               child: Stack(
                 children: [
                   Image.asset(

@@ -23,7 +23,7 @@ class _DoctorMainState extends State<DoctorMain> {
             AppointmentsBloc(dataSource: AppointmentsDataSource())..onFetchAppointments(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('لوحه تحكم الطبيب'),
+            title: const Text('لوحة تحكم الطبيب'),
             bottom: const TabBar(tabs: [
               Tab(icon: Icon(Icons.pending), text: 'مواعيد في الانتظار'),
               Tab(icon: Icon(Icons.done), text: 'مواعيد المقبوله'),
@@ -33,7 +33,7 @@ class _DoctorMainState extends State<DoctorMain> {
           body: const TabBarView(children: [
             MyDoctorAppointment(),
             DoctorApprovedAppointments(),
-            DoctorDeclinedAppointemts()
+            DoctorDeclinedAppointments()
           ]),
         ),
       ),

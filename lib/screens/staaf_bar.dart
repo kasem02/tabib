@@ -1,125 +1,46 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:AlMokhtar_Clinic/screens/doctor_screens/staffprofile.dart';
+import 'package:AlMokhtar_Clinic/features/doctors_register/pages/doctors_register_page.dart';
+import 'package:AlMokhtar_Clinic/features/home/pages/doctorsList.dart';
+import 'package:AlMokhtar_Clinic/model/gbutton_model.dart';
+import 'package:AlMokhtar_Clinic/screens/staffprofile.dart';
+import 'package:AlMokhtar_Clinic/widgets/app_scaffold.dart';
+import 'package:AlMokhtar_Clinic/widgets/nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:AlMokhtar_Clinic/screens/doctor_screens/staffmain.dart';
+import 'package:AlMokhtar_Clinic/screens/staffmain.dart';
 
+class StaffBar extends StatelessWidget {
+  StaffBar();
 
-class StaffBar extends StatefulWidget {
-  const StaffBar({Key? key}) : super(key: key);
-
-  @override
-  State<StaffBar> createState() => _StaffBarState();
-}
-
-class _StaffBarState extends State<StaffBar> {
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int _selectedIndex = 0;
-  List<Widget> _pages = [
+  final List<Widget> _pages = [
     staffmain(),
-    staffprofile(),
+    DoctorsRegisterPage(),
   ];
-
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  late User user;
-
-  Future<void> _getUser() async {
-    user = _auth.currentUser!;
-  }
-
-  _navigate(Widget screen) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
-  }
-
-  String shortcut = "no action set";
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        key: _scaffoldKey,
-        body: _pages[_selectedIndex],
-        bottomNavigationBar: Container(
-
-          decoration: BoxDecoration(
-            color: Colors.grey,
-
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+    return AppScaffold(
+        navBarRelatedChild: _pages,
+        navBar: AppNavBar(
+          tabs: [
+            GButtonModel(
+              index: 0,
+              selectedIcon: FlutterIcons.home_fou,
+              nonSelectedIcon: FlutterIcons.home_variant_outline_mco,
+              title: 'الخدمات',
             ),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.black.withOpacity(.2),
-              ),
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
-              child: GNav(
-                curve: Curves.easeOutExpo,
-                color: Colors.black,
-
-
-
-                haptic: true,
-                tabBorderRadius: 40,
-                gap: 5,
-                activeColor: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                duration: Duration(milliseconds: 400),
-                tabBackgroundColor: Colors.blue.withOpacity(0.7),
-                textStyle: GoogleFonts.lato(
-                  color: Colors.black,
-                ),
-                tabs: [
-                  GButton(
-                    iconSize: _selectedIndex != 0 ? 28 : 25,
-                    icon: _selectedIndex == 0
-                        ? FlutterIcons.home_fou
-                        : FlutterIcons.home_variant_outline_mco,
-                    text: 'الرئسية',
-                  ),
-                  GButton(
-                    icon: FlutterIcons.doctor_mco,
-                    text: 'حسابي',
-                  ),
-
-
-                ],
-                selectedIndex: _selectedIndex,
-                onTabChange: _onItemTapped,
-              ),
+            GButtonModel(
+              index: 1,
+              selectedIcon: FlutterIcons.doctor_mco,
+              nonSelectedIcon: FlutterIcons.doctor_mco,
+              title: 'الأطباء',
             ),
-          ),
-        ),
-      ),
-    );  }
+          ],
+        ));
+  }
 }

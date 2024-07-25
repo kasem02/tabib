@@ -1,5 +1,6 @@
 import 'package:AlMokhtar_Clinic/app_status.dart';
 import 'package:AlMokhtar_Clinic/features/login/data/auth_data_source.dart';
+import 'package:AlMokhtar_Clinic/features/login/data/model/user_model.dart';
 import 'package:AlMokhtar_Clinic/features/login/manager/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +12,7 @@ class AuthBloc extends Cubit<AuthState> {
             userName: "",
             password: "",
             loginStatus: AppStatus.pure,
+            registerState: AppStatus.pure,
             logoutStatus: AppStatus.pure,
             userType: UserType.pure));
 
@@ -51,6 +53,16 @@ class AuthBloc extends Cubit<AuthState> {
       emit(state.copyWith(logoutStatus: AppStatus.Success));
     } on Exception {
       emit(state.copyWith(logoutStatus: AppStatus.Failure));
+    }
+  }
+
+  void onRegisterUser({required UserModel user}) async {
+    emit(state.copyWith(registerState: AppStatus.Loading)) ;
+    try {
+      await loginDataSource.registerUser(user: user);
+      emit(state.copyWith(registerState: AppStatus.Success));
+    } on Exception {
+      emit(state.copyWith(registerState: AppStatus.Failure));
     }
   }
 }

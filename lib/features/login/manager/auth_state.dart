@@ -5,6 +5,7 @@ class AuthState {
   final String password;
   final AppStatus loginStatus;
   final AppStatus logoutStatus;
+  final AppStatus registerState;
   final UserType userType;
 
   AuthState(
@@ -12,6 +13,7 @@ class AuthState {
       required this.password,
       required this.loginStatus,
       required this.logoutStatus,
+      required this.registerState,
       required this.userType});
 
   AuthState copyWith(
@@ -19,14 +21,16 @@ class AuthState {
       String? password,
       AppStatus? loginStatus,
       AppStatus? logoutStatus,
+      AppStatus? registerState,
       UserType? userType}) {
     return AuthState(
-      logoutStatus: logoutStatus ?? this.logoutStatus,
-      loginStatus: loginStatus ?? this.loginStatus,
+        registerState: registerState ?? this.registerState,
+        logoutStatus: logoutStatus ?? this.logoutStatus,
+        loginStatus: loginStatus ?? this.loginStatus,
         userName: userName ?? this.userName,
         password: password ?? this.password,
         userType: userType ?? this.userType);
   }
 }
 
-enum UserType { doctor, patient, pure }
+enum UserType { doctor, patient, pure, staff }

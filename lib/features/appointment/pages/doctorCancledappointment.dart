@@ -6,15 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class DoctorDeclinedAppointemts extends StatefulWidget {
-  const DoctorDeclinedAppointemts({Key? key}) : super(key: key);
+class DoctorDeclinedAppointments extends StatefulWidget {
+  const DoctorDeclinedAppointments({Key? key}) : super(key: key);
 
   @override
-  State<DoctorDeclinedAppointemts> createState() =>
-      _DoctorDeclinedAppointemtsState();
+  State<DoctorDeclinedAppointments> createState() =>
+      _DoctorDeclinedAppointmentsState();
 }
 
-class _DoctorDeclinedAppointemtsState extends State<DoctorDeclinedAppointemts> {
+class _DoctorDeclinedAppointmentsState extends State<DoctorDeclinedAppointments> {
   String _dateFormatter(String _timestamp) {
     String formattedDate =
         DateFormat('dd-MM-yyyy').format(DateTime.parse(_timestamp));

@@ -1,3 +1,4 @@
+import 'package:AlMokhtar_Clinic/features/login/data/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -24,5 +25,14 @@ class AuthDataSource {
     var userType = user.data()!['userType'].toString();
 
     return userType;
+  }
+
+  Future<void> registerUser({required UserModel user}) async {
+    final result = await _auth.createUserWithEmailAndPassword(
+        email: user.email, password: user.password);
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(result.user!.uid)
+        .set(user.toJson());
   }
 }
