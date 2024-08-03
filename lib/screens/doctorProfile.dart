@@ -1,3 +1,4 @@
+import 'package:AlMokhtar_Clinic/widgets/app_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 class DoctorProfile extends StatefulWidget {
   final String? doctor;
 
-  const DoctorProfile({Key? key,  this.doctor}) : super(key: key);
+  const DoctorProfile({Key? key, this.doctor}) : super(key: key);
+
   @override
   _DoctorProfileState createState() => _DoctorProfileState();
 }
@@ -30,10 +32,11 @@ class _DoctorProfileState extends State<DoctorProfile> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('doctors').orderBy('name').startAt([widget.doctor]).endAt(
-                  [widget.doctor! + '\uf8ff']).snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          stream: FirebaseFirestore.instance
+              .collection('doctors')
+              .orderBy('name')
+              .startAt([widget.doctor]).endAt([widget.doctor! + '\uf8ff']).snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(
                 child: CircularProgressIndicator(),
@@ -51,9 +54,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   return Container(
                     margin: EdgeInsets.only(top: 5),
                     child: Column(
-
-
-
                       children: <Widget>[
                         Container(
                           alignment: Alignment.centerLeft,
@@ -99,7 +99,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         SizedBox(
                           height: 16,
                         ),
-
                         Container(
                           padding: EdgeInsets.only(left: 22, right: 22),
                           alignment: Alignment.center,
@@ -113,7 +112,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-
                             children: [
                               SizedBox(
                                 width: 15,
@@ -126,9 +124,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 child: Text(
                                   document['Period'].isEmpty ? "لم تتم الاضافة بعد" : document['Period'],
-
                                   style: GoogleFonts.lato(
-
                                     fontSize: 16,
                                   ),
                                 ),
@@ -152,12 +148,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 width: 11,
                               ),
                               TextButton(
-                                onPressed: () =>
-                                    _launchCaller("tel:" + document['phone']),
+                                onPressed: () => _launchCaller("tel:" + document['phone']),
                                 child: Text(
                                   document['phone'].toString(),
-                                  style: GoogleFonts.lato(
-                                      fontSize: 16, color: Colors.blue),
+                                  style: GoogleFonts.lato(fontSize: 16, color: Colors.blue),
                                 ),
                               ),
                               SizedBox(
@@ -169,35 +163,36 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         SizedBox(
                           height: 0,
                         ),
-
                         Container(
                             margin: EdgeInsets.symmetric(horizontal: 10),
                             child: SingleChildScrollView(
                               child: Row(
                                 children: [
-                                  SizedBox(width: 15,),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
                                   Icon(Icons.info),
-                                  SizedBox(width: 20,),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
                                   Expanded(
                                     child: Text(
-                                      document['description'].isEmpty
-                                          ? "لم تتم الاضافة بعد"
-                                          : document['description'],
-                                      style: GoogleFonts.lato(fontSize: 17,),
+                                      document['description'].isEmpty ? "لم تتم الاضافة بعد" : document['description'],
+                                      style: GoogleFonts.lato(
+                                        fontSize: 17,
+                                      ),
                                       softWrap: true,
                                     ),
                                   ),
                                 ],
                               ),
-                            )
-                        ),
+                            )),
                         SizedBox(
                           height: 20,
                         ),
                         SizedBox(
                           height: 20,
                         ),
-
                         SizedBox(
                           height: 50,
                         ),
@@ -205,13 +200,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           padding: EdgeInsets.symmetric(horizontal: 30),
                           height: 50,
                           width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32.0),
-                              ),
-                            ),
+                          child: AppButton(
+                            title: 'احجز موعد',
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -219,19 +209,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                   builder: (context) => BookingScreen(
                                     doctor: document['name'],
                                     doctormail: document['doctormail'],
-
                                   ),
                                 ),
                               );
                             },
-                            child: Text(
-                              'احجز موعد',
-                              style: GoogleFonts.lato(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                           ),
                         ),
                         SizedBox(

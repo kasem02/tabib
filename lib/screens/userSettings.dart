@@ -51,37 +51,7 @@ class _UserSettingsState extends State<UserSettings> {
               color: Colors.indigo, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
-        children: [
-          UserDetails(),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            padding: EdgeInsets.symmetric(horizontal: 14),
-            height: MediaQuery.of(context).size.height / 14,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.blueGrey[50],
-            ),
-            child: TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-                _signOut();
-              },
-              style: TextButton.styleFrom(),
-              child: Text(
-                'تسجيل الخروج',
-                style: GoogleFonts.lato(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: UserDetails(),
     );
   }
 }

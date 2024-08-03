@@ -30,6 +30,7 @@ class AuthDataSource {
   Future<void> registerUser({required UserModel user}) async {
     final result = await _auth.createUserWithEmailAndPassword(
         email: user.email, password: user.password);
+    await result.user!.updateDisplayName(user.name) ;
     await FirebaseFirestore.instance
         .collection("users")
         .doc(result.user!.uid)

@@ -44,7 +44,7 @@ List<CardModel> cards = [
 
 
 ];
-List<CardModel> proid = [
+List<CardModel> period = [
   CardModel("فتره صباحية", 0xFFec407a, Icons.sunny),
   CardModel("فترة مسائية", 0xFF5c6bc0, FlutterIcons.moon_faw5),
 ];

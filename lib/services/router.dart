@@ -61,6 +61,12 @@ extension _Route on _MyAppState {
           path: AppRoutes.registerPage.path,
           builder: (context, state) => UserRegisterPage(),
         ),
+        GoRoute(
+          path: AppRoutes.periodDoctorsPage.path,
+          builder: (context, state) {
+            return ExploreListbyperoid(peroid: state.extra as String);
+          },
+        ),
       ],
     );
   }

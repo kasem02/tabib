@@ -18,15 +18,4 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-// Future<String> _getUser() async {
-//   final _auth  = FirebaseAuth.instance ;
-//   var user = await FirebaseFirestore.instance
-//       .collection('users')
-//       .doc(_auth.currentUser!.uid)
-//       .get();
-//   var userType = user.data()!['userType'].toString();
-//   debugPrint('this is the get user function $userType');
-//
-//   return userType;
-// }
 

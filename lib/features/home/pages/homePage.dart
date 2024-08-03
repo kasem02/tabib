@@ -51,8 +51,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).canvasColor, // Set background color to transparent
+      backgroundColor: Theme.of(context).canvasColor, // Set background color to transparent
       key: _scaffoldKey,
       body: Container(
         child: SafeArea(
@@ -75,9 +74,7 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.only(left: 20, bottom: 10),
                         child: Center(
                           child: Text(
-                            context.read<AppBloc>().state.userName +
-                                " " +
-                                "مرحبا بك  ",
+                            context.read<AppBloc>().state.userName + " " + "مرحبا بك  ",
                             style: GoogleFonts.lato(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -107,11 +104,9 @@ class _HomePageState extends State<HomePage> {
                           textInputAction: TextInputAction.search,
                           controller: _doctorName,
                           decoration: InputDecoration(
-                            contentPadding:
-                                EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                            contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                             border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide.none,
                             ),
                             filled: true,
@@ -133,8 +128,7 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                                 icon: Icon(FlutterIcons.search1_ant),
                                 onPressed: () {
-                                  context.push(AppRoutes.searchList.path,
-                                      extra: _doctorName.text);
+                                  context.push(AppRoutes.searchList.path, extra: _doctorName.text);
                                 },
                               ),
                             ),
@@ -146,10 +140,7 @@ class _HomePageState extends State<HomePage> {
                           onFieldSubmitted: (String value) {
                             setState(
                               () {
-                                value.length == 0
-                                    ? Container()
-                                    : context.push(AppRoutes.searchList.path,
-                                        extra: value);
+                                value.length == 0 ? Container() : context.push(AppRoutes.searchList.path, extra: value);
                               },
                             );
                           },
@@ -159,10 +150,7 @@ class _HomePageState extends State<HomePage> {
                         "صحتك تهمنا",
                         textAlign: TextAlign.right,
                         textDirection: TextDirection.rtl,
-                        style: GoogleFonts.lato(
-                            color: Colors.blue[800],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                        style: GoogleFonts.lato(color: Colors.blue[800], fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -171,10 +159,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         "المتخصصين",
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(
-                            color: Colors.blue[800],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                        style: GoogleFonts.lato(color: Colors.blue[800], fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Container(
                         height: 170,
@@ -197,14 +182,11 @@ class _HomePageState extends State<HomePage> {
                                 );
                               },
                               child: Container(
-                                margin: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+                                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                 width: 140,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    gradient: LinearGradient(colors: [
-                                      Color(0xffA1D4ED),
-                                      Color(0xff50BDF3)
-                                    ]),
+                                    gradient: LinearGradient(colors: [Color(0xffA1D4ED), Color(0xff50BDF3)]),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey,
@@ -226,8 +208,7 @@ class _HomePageState extends State<HomePage> {
                                           child: Icon(
                                             cards[index].cardIcon,
                                             size: 26,
-                                            color: Color(
-                                                cards[index].cardBackground),
+                                            color: Color(cards[index].cardBackground),
                                           )),
                                     ),
                                     SizedBox(
@@ -237,9 +218,7 @@ class _HomePageState extends State<HomePage> {
                                       cards[index].doctor,
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.lato(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
+                                          color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                                     ),
                                   ],
                                 ),
@@ -254,10 +233,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         "الفترات",
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(
-                            color: Colors.blue[800],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                        style: GoogleFonts.lato(color: Colors.blue[800], fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Container(
                         height: 170,
@@ -268,58 +244,54 @@ class _HomePageState extends State<HomePage> {
                           physics: ClampingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          itemCount: proid.length,
+                          itemCount: period.length,
                           itemBuilder: (context, index) {
                             //print("images path: ${cards[index].cardImage.toString()}");
-                            return Container(
-                              margin: EdgeInsets.only(right: 14),
-                              width: 140,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(colors: [
-                                    Color(0xffA1D4ED),
-                                    Color(0xff50BDF3)
-                                  ]),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 4.0,
-                                      spreadRadius: 0.0,
-                                      offset: Offset(3, 3),
+                            return InkWell(
+                              onTap: () => context.push(AppRoutes.periodDoctorsPage.path, extra: period[index].doctor),
+                              child: Container(
+                                margin: EdgeInsets.only(right: 14),
+                                width: 140,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    gradient: LinearGradient(colors: [Color(0xffA1D4ED), Color(0xff50BDF3)]),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 4.0,
+                                        spreadRadius: 0.0,
+                                        offset: Offset(3, 3),
+                                      ),
+                                    ]),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 16,
                                     ),
-                                  ]),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 29,
-                                      child: Icon(
-                                        proid[index].cardIcon,
-                                        size: 26,
-                                        color:
-                                            Color(proid[index].cardBackground),
-                                      )),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    proid[index].doctor,
-                                    style: GoogleFonts.lato(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
+                                    CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 29,
+                                        child: Icon(
+                                          period[index].cardIcon,
+                                          size: 26,
+                                          color: Color(period[index].cardBackground),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      period[index].doctor,
+                                      style: GoogleFonts.lato(
+                                          color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
                         ),
                       ),
-
                     ],
                   ),
                 ),

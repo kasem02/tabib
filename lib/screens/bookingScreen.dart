@@ -1,3 +1,4 @@
+import 'package:AlMokhtar_Clinic/widgets/app_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,18 +11,18 @@ class BookingScreen extends StatefulWidget {
   final String doctor;
   final String doctormail;
 
+  const BookingScreen({Key? key, required this.doctor, required this.doctormail}) : super(key: key);
 
-
-  const BookingScreen({Key? key, required this.doctor,required this.doctormail}) : super(key: key);
   @override
   _BookingScreenState createState() => _BookingScreenState();
 }
+
 FirebaseAuth _auth = FirebaseAuth.instance;
 late User? user;
+
 Future<void> _getUser() async {
   user = _auth.currentUser!;
 }
-
 
 class _BookingScreenState extends State<BookingScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -50,23 +51,31 @@ class _BookingScreenState extends State<BookingScreen> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   late User user;
-  Future<void> _getUser() async {
+
+  void _getUser()  {
     user = _auth.currentUser!;
   }
 
+  void InitFields()  {
+     _getUser()  ;
+    _doctorController.text = widget.doctor;
+    _MailController.text = widget.doctormail;
+    _nameController.text =  user.displayName ?? "";
+
+
+  }
   Future<void> selectDate(BuildContext context) async {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now() ,
+      firstDate: DateTime.now(),
       lastDate: DateTime(2025),
     ).then(
       (date) {
         setState(
           () {
             selectedDate = date!;
-            String formattedDate =
-                DateFormat('dd-MM-yyyy').format(selectedDate);
+            String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
             _dateController.text = formattedDate;
             dateUTC = DateFormat('yyyy-MM-dd').format(selectedDate);
           },
@@ -82,8 +91,7 @@ class _BookingScreenState extends State<BookingScreen> {
     );
 
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    String formattedTime = localizations.formatTimeOfDay(selectedTime!,
-        alwaysUse24HourFormat: false);
+    String formattedTime = localizations.formatTimeOfDay(selectedTime!, alwaysUse24HourFormat: false);
 
     if (formattedTime != null) {
       setState(() {
@@ -137,22 +145,19 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // الوصول إلى العنصر الجديد هنا
   }
+
   @override
   void initState() {
     super.initState();
-    _getUser();
+    InitFields();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       selectTime(context);
     });
-    _doctorController.text = widget.doctor;
-    _MailController.text = widget.doctormail;
-    _nameController.text =  user!.displayName!;
   }
 
   @override
@@ -179,7 +184,7 @@ class _BookingScreenState extends State<BookingScreen> {
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             overscroll.disallowIndicator();
-            return true ;
+            return true;
           },
           child: ListView(
             shrinkWrap: true,
@@ -219,31 +224,24 @@ class _BookingScreenState extends State<BookingScreen> {
                         controller: _nameController,
                         focusNode: f1,
                         textAlign: TextAlign.center,
-
                         validator: (value) {
                           if (value!.isEmpty) return 'ادخل اسم المريض';
                           return null;
                         },
-                        style: GoogleFonts.lato(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(90.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
                           fillColor: Colors.grey[350],
                           hintText: 'اسم المريض',
-
                           hintStyle: GoogleFonts.lato(
                             color: Colors.black26,
                             fontSize: 18,
-
                             fontWeight: FontWeight.w800,
-
                           ),
                         ),
                         onFieldSubmitted: (String value) {
@@ -261,15 +259,11 @@ class _BookingScreenState extends State<BookingScreen> {
                         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                         controller: _phoneController,
                         textAlign: TextAlign.center,
-
-                        style: GoogleFonts.lato(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(90.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
@@ -302,16 +296,12 @@ class _BookingScreenState extends State<BookingScreen> {
                         keyboardType: TextInputType.emailAddress,
                         focusNode: f3,
                         textAlign: TextAlign.center,
-
                         controller: _MailController,
-                        style: GoogleFonts.lato(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
-                          contentPadding:
-                          EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                           border: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(90.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
@@ -344,17 +334,13 @@ class _BookingScreenState extends State<BookingScreen> {
                         focusNode: f4,
                         controller: _descriptionController,
                         textAlign: TextAlign.center,
-
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        style: GoogleFonts.lato(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(90.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
@@ -378,21 +364,18 @@ class _BookingScreenState extends State<BookingScreen> {
                       TextFormField(
                         focusNode: f5,
                         controller: _doctorController,
-                  //      initialValue: user!.displayName!,
+                        //      initialValue: user!.displayName!,
                         textAlign: TextAlign.center,
 
                         validator: (value) {
                           if (value!.isEmpty) return 'ادخل اسم الطبيب';
                           return null;
                         },
-                        style: GoogleFonts.lato(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          contentPadding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(90.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
@@ -412,71 +395,47 @@ class _BookingScreenState extends State<BookingScreen> {
                         alignment: Alignment.center,
                         height: 60,
                         width: MediaQuery.of(context).size.width,
-                        child: Stack(
-                          alignment: Alignment.centerRight,
-                          children: [
-                            TextFormField(
-                              focusNode: f6,
-                              textAlign: TextAlign.center,
-                              readOnly: true,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                  left: 20,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(90.0)),
-                                  borderSide: BorderSide.none,
-                                ),
-                                filled: true,
-                                fillColor: Colors.grey[350],
-                                hintText: 'اختار التاريخ*',
-
-                                hintStyle: GoogleFonts.lato(
-                                  color: Colors.black26,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              controller: _dateController,
-                              validator: (value) {
-                                if (value!.isEmpty)
-                                  return 'ادخل التاريخ من فضلك ';
-                                return null;
-                              },
-                              onFieldSubmitted: (String value) {
-                                f6.unfocus();
-                                FocusScope.of(context).requestFocus(f5);
-                              },
-                              textInputAction: TextInputAction.next,
-                              style: GoogleFonts.lato(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                        child: TextFormField(
+                          focusNode: f6,
+                          textAlign: TextAlign.center,
+                          readOnly: true,
+                          onTap: () {
+                            selectDate(context);
+                          },
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(
+                              Icons.calendar_month,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5.0),
-                              child: ClipOval(
-                                child: Material(
-                                  color: Colors.indigo, // button color
-                                  child: InkWell(
-                                    // inkwell color
-                                    child: SizedBox(
-                                      width: 40,
-                                      height: 40,
-                                      child: Icon(
-                                        Icons.date_range_outlined,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      selectDate(context);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                            contentPadding: EdgeInsets.only(
+                              left: 20,
+                              top: 10,
+                              bottom: 10,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.grey[350],
+                            hintText: 'اختار التاريخ*',
+                            hintStyle: GoogleFonts.lato(
+                              color: Colors.black26,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          controller: _dateController,
+                          validator: (value) {
+                            if (value!.isEmpty) return 'ادخل التاريخ من فضلك ';
+                            return null;
+                          },
+                          onFieldSubmitted: (String value) {
+                            f6.unfocus();
+                            FocusScope.of(context).requestFocus(f5);
+                          },
+                          textInputAction: TextInputAction.next,
+                          style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
@@ -486,108 +445,68 @@ class _BookingScreenState extends State<BookingScreen> {
                         alignment: Alignment.center,
                         height: 60,
                         width: MediaQuery.of(context).size.width,
-                        child: Stack(
-                          alignment: Alignment.centerRight,
-                          children: [
-                            TextFormField(
-                              focusNode: f7,
-                              textAlign: TextAlign.center,
-                              readOnly: true,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                  left: 20,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(90.0)),
-                                  borderSide: BorderSide.none,
-                                ),
-                                filled: true,
-                                fillColor: Colors.grey[350],
-                                hintText: 'اختار الوقت *',
-                                hintStyle: GoogleFonts.lato(
-                                  color: Colors.black26,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              controller: _timeController,
-                              validator: (value) {
-                                if (value!.isEmpty)
-                                  return 'نرجو منك ادخال الوقت ';
-                                return null;
-                              },
-                              onFieldSubmitted: (String value) {
-                                f7.unfocus();
-                              },
-                              textInputAction: TextInputAction.next,
-                              style: GoogleFonts.lato(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Padding(
+                        child: TextFormField(
+                          onTap: () {
+                            selectTime(context);
+                          },
+                          focusNode: f7,
+                          textAlign: TextAlign.center,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Padding(
                               padding: const EdgeInsets.only(right: 5.0),
                               child: ClipOval(
-                                child: Material(
-                                  color: Colors.indigo, // button color
-                                  child: InkWell(
-                                    // inkwell color
-                                    child: SizedBox(
-                                      width: 40,
-                                      height: 40,
-                                      child: Icon(
-                                        Icons.timer_outlined,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      selectTime(context);
-                                    },
-                                  ),
+                                child: Icon(
+                                  Icons.timer_outlined,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 2,
-
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0),
                             ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              print(_nameController.text);
-                              print(_dateController.text);
-                              print(widget.doctor);
-                              showAlertDialog(context);
-                              _createAppointment();
-                            }
-                          },
-                          child: Text(
-                            "احجز موعد",
-                            style: GoogleFonts.lato(
-                              color: Colors.white,
+                            contentPadding: EdgeInsets.only(
+                              left: 20,
+                              top: 10,
+                              bottom: 10,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.grey[350],
+                            hintText: 'اختار الوقت *',
+                            hintStyle: GoogleFonts.lato(
+                              color: Colors.black26,
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
+                          controller: _timeController,
+                          validator: (value) {
+                            if (value!.isEmpty) return 'نرجو منك ادخال الوقت ';
+                            return null;
+                          },
+                          onFieldSubmitted: (String value) {
+                            f7.unfocus();
+                          },
+                          textInputAction: TextInputAction.next,
+                          style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
                         height: 40,
                       ),
-
+                      AppButton(
+                        title: "احجز موعد",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            showAlertDialog(context);
+                            _createAppointment();
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
                     ],
                   ),
                 ),
@@ -600,20 +519,15 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   Future<void> _createAppointment() async {
-
-    FirebaseFirestore.instance
-        .collection('appointments')
-        .doc()
-        .set({
+    FirebaseFirestore.instance.collection('appointments').doc().set({
       'name': _nameController.text,
       'phone': _phoneController.text,
       'description': _descriptionController.text,
       'doctor': _doctorController.text,
       'doctormail': _MailController.text,
-      'pathionmail' : user!.email!,
+      'pathionmail': user!.email!,
       'date': DateTime.parse(dateUTC + ' ' + date_Time + ':00'),
       'approved': 'onhold',
-
     }, SetOptions(merge: true));
   }
 }

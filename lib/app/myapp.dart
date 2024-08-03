@@ -13,6 +13,7 @@ import 'package:AlMokhtar_Clinic/features/login/pages/login_page.dart';
 import 'package:AlMokhtar_Clinic/features/login/pages/register_page.dart';
 import 'package:AlMokhtar_Clinic/firestore-data/searchList.dart';
 import 'package:AlMokhtar_Clinic/screens/doctor_bar.dart';
+import 'package:AlMokhtar_Clinic/screens/explorelistbyperiod.dart';
 import 'package:AlMokhtar_Clinic/screens/staaf_bar.dart';
 import 'package:AlMokhtar_Clinic/screens/userSettings.dart';
 import 'package:flutter/material.dart';
