@@ -22,6 +22,9 @@ class AppointmentsBloc extends Cubit<AppointmentsState> {
       final result = await dataSource.fetchAppointments();
       emit(state.copyWith(
           fetchState: AppStatus.Success,
+          pendingAppointments: result
+              .where((document) => document['approved'] == 'onhold')
+              .toList(),
           approvedAppointments: result
               .where((document) => document['approved'] == 'true')
               .toList(),

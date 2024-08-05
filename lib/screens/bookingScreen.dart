@@ -295,6 +295,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         focusNode: f3,
+                        enabled: false,
                         textAlign: TextAlign.center,
                         controller: _MailController,
                         style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
@@ -313,14 +314,6 @@ class _BookingScreenState extends State<BookingScreen> {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'ادخل رقم الهاتف';
-                          } else if (value.length < 10) {
-                            return 'هنالك خطا في رقم الهاتف';
-                          }
-                          return null;
-                        },
                         onFieldSubmitted: (String value) {
                           f2.unfocus();
                           FocusScope.of(context).requestFocus(f3);

@@ -173,34 +173,34 @@ class UserRegisterPage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          StatefulBuilder(
-                            builder: (context , setState) {
-                              return DropdownButton<String>(
-                                alignment: Alignment.centerRight,
-                                value: _userType,
-                                items: ["doctor", "patient",]
-                                    .map<DropdownMenuItem<String>>(
-                                        (e) => DropdownMenuItem<String>(child: Text(e) , value: e,))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState((){
-                                    _userType = value!;
-                                  }) ;
-                                },
-                              );
-                            }
-                          ),
-                          SizedBox(width: 15,) ,
-                          Text("نوع المستخدم" , style: TextStyle(fontSize: 14),) ,
-
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: [
+                    //       StatefulBuilder(
+                    //         builder: (context , setState) {
+                    //           return DropdownButton<String>(
+                    //             alignment: Alignment.centerRight,
+                    //             value: _userType,
+                    //             items: ["doctor", "patient",]
+                    //                 .map<DropdownMenuItem<String>>(
+                    //                     (e) => DropdownMenuItem<String>(child: Text(e) , value: e,))
+                    //                 .toList(),
+                    //             onChanged: (value) {
+                    //               setState((){
+                    //                 _userType = value!;
+                    //               }) ;
+                    //             },
+                    //           );
+                    //         }
+                    //       ),
+                    //       SizedBox(width: 15,) ,
+                    //       Text("نوع المستخدم" , style: TextStyle(fontSize: 14),) ,
+                    //
+                    //     ],
+                    //   ),
+                    // ),
                     AppTextField(
                         validator: (p0) {
                           if (p0 == null || p0.isEmpty) {
@@ -237,7 +237,7 @@ class UserRegisterPage extends StatelessWidget {
                                                 name: _name.text,
                                                 email: _emailController.text,
                                                 bio: _bio.text,
-                                                userType: _userType,
+                                                userType: "patient",
                                                 phone: _phone.text,
                                                 city: _city.text));
                                       }

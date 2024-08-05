@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:AlMokhtar_Clinic/screens/serviceandprice.dart';
 
@@ -46,13 +47,12 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        AntDesign.arrowleft,
-                        color: Colors.white,
-                      ),
-                      Icon(
-                        AntDesign.logout,
-                        color: Colors.white,
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: Icon(
+                          AntDesign.arrowleft,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -150,7 +150,7 @@ class _DiseaseDetailState extends State<DiseaseDetail> {
                                         Column(
                                           children: [
                                             Text(
-                                              'التوفر',
+                                              'الطبيب المختص',
                                               style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontFamily: 'Nunito',

@@ -18,6 +18,7 @@ class DoctorAddPage extends StatelessWidget {
   final TextEditingController _description = TextEditingController();
 
   final TextEditingController _period = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   final TextEditingController _name = TextEditingController();
   final TextEditingController _mail = TextEditingController();
@@ -40,11 +41,13 @@ class DoctorAddPage extends StatelessWidget {
               break;
             case AppStatus.Failure:
               context.pop();
+              context.pop();
               context.showFailureAlert();
               break;
             case AppStatus.Success:
-              context.pop(2);
-              context.showSuccessAlert();
+              context.pop();
+              context.pop();
+              context.showSuccessAlert(message: "تم إضافة مستخدم بنجاح!");
               break;
             default:
               break;
@@ -71,6 +74,19 @@ class DoctorAddPage extends StatelessWidget {
                         },
                         controller: _name,
                         hintText: 'الاسم',
+                        onChange: (text) {}),
+                    SizedBox(
+                      height: 10,
+                    ), AppTextField(
+                      isPasswordField: true,
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return "ادخل رمز سري صجيح";
+                          }
+                          return null;
+                        },
+                        controller: _password,
+                        hintText: 'الرمز السري',
                         onChange: (text) {}),
                     SizedBox(
                       height: 10,
@@ -152,6 +168,7 @@ class DoctorAddPage extends StatelessWidget {
                                         .read<DoctorsRegisterBloc>()
                                         .onAddDoctor(
                                             doctor: DoctorModel(
+                                              password: _password.text,
                                                 period: _period.text,
                                                 description: _description.text,
                                                 mail: _mail.text,

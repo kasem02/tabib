@@ -1,7 +1,9 @@
 
+import 'package:AlMokhtar_Clinic/widgets/app_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:AlMokhtar_Clinic/features/home/pages/myAppointments.dart';
 import 'package:intl/intl.dart';
@@ -75,6 +77,8 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
         style: GoogleFonts.lato(fontWeight: FontWeight.bold),
       ),
       onPressed: () {
+        context.pop();
+        context.pop();
       },
     );
 
@@ -87,7 +91,7 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
         ),
       ),
       content: Text(
-        "تم تسجيل الموعد",
+        "تم إضافة الخدمة",
         style: GoogleFonts.lato(),
       ),
       actions: [
@@ -127,7 +131,7 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          'حجز موعد',
+          'إضافة خدمة',
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 20,
@@ -319,35 +323,17 @@ class _stuff_addcreenState extends State<stuff_addcreen> {
                       SizedBox(
                         height: 40,
                       ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 2,
+                      AppButton(
+                        title: "إضافة",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            print(_nameController.text);
+                            showAlertDialog(context);
 
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              print(_nameController.text);
-                              showAlertDialog(context);
+                            _createAppointment();
 
-                              _createAppointment();
-
-                            }
-                          },
-                          child: Text(
-                            "موافق",
-                            style: GoogleFonts.lato(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                          }
+                        },
                       ),
                       SizedBox(
                         height: 40,

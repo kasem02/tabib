@@ -10,12 +10,13 @@ class DoctorModel {
   final String phone;
 
   final String type;
-
+  final String password ;
   final String name;
 
   DoctorModel(
       {required this.period,
       required this.description,
+        this.password = '' ,
       required this.mail,
       required this.image,
       required this.phone,
